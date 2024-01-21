@@ -1,0 +1,30 @@
+
+
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+
+.toolbar {
+  background: blue;
+  color: white;
+}
+
+.example-container {
+  height: 1200px;
+  width: 1200px;
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+
+

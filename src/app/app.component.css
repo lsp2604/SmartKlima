@@ -1,10 +1,6 @@
-
-
-
 .example-spacer {
   flex: 1 1 auto;
 }
-
 
 .toolbar {
   background: blue;
@@ -14,6 +10,7 @@
 .example-container {
   height: 1200px;
   width: 1200px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .example-sidenav-content {

@@ -12,7 +12,7 @@ import {TemperatureSliderComponent} from "./temperature-slider/temperature-slide
     TemperatureSliderComponent
   ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
 }

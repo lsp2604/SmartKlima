@@ -21,7 +21,7 @@ import {MatSlider, MatSliderThumb} from "@angular/material/slider";
     MatLabel
   ],
   templateUrl: './temperature-slider.component.html',
-  styleUrl: './temperature-slider.component.css'
+  styleUrl: './temperature-slider.component.scss'
 })
 export class TemperatureSliderComponent {
 

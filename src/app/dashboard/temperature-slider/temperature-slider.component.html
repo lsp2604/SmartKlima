@@ -1,0 +1,19 @@
+<mat-card class="temp-slider-result-card">
+  <mat-card-content>
+    <h2>Result</h2>
+    <div class="temp-slider-label-container">
+      <label id="temp-slider-name-label" class="temp-slider-name-label">Value</label>
+      <label class="temp-slider-value-label">{{ slider.value }}</label>
+    </div>
+    <mat-slider
+      class="temp-slider-margin custom-slider"
+      [disabled]="disabled"
+      [max]="max"
+      [min]="min"
+      [step]="step"
+      [discrete]="thumbLabel"
+      [showTickMarks]="showTicks">
+      <input matSliderThumb [(ngModel)]="value" #slider>
+    </mat-slider>
+  </mat-card-content>
+</mat-card>

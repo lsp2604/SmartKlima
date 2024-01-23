@@ -1,23 +1,22 @@
+<mat-sidenav-container class="app-container" autosize [hasBackdrop]="true" fullscreen>
 
-
-
-<mat-sidenav-container class="example-container" autosize [hasBackdrop]="true">
-
-  <mat-toolbar class="toolbar">
-    <button mat-raised-button color="accent" class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+  <mat-toolbar class="app-toolbar">
+    <button mat-raised-button color="accent" class="menu-button" aria-label="Menü öffnen" (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>My App</span>
+    <span>Meine App</span>
   </mat-toolbar>
-  <mat-sidenav #drawer class="example-sidenav" mode="side">
-        <mat-button-toggle routerLink="homepage">Home Page</mat-button-toggle>
-        <mat-button-toggle routerLink="dashboard">Dashboard</mat-button-toggle>
+  <mat-sidenav #drawer class="app-sidenav" mode="side" >
+    <mat-nav-list>
+      <mat-button-toggle class="homepage_button" routerLink="homepage" (click)="drawer.toggle()">Startseite</mat-button-toggle>
+      <div fxflex></div>
+      <mat-button-toggle class="dashboard_button" routerLink="dashboard" (click)="drawer.toggle()">Dashboard</mat-button-toggle>
+      <div fxFlex></div>
+      <mat-button-toggle class="history_button" routerLink="history">History</mat-button-toggle>
+    </mat-nav-list>
   </mat-sidenav>
-
   <router-outlet>
   </router-outlet>
-
 </mat-sidenav-container>
-
 
 

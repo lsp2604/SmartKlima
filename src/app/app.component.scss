@@ -1,0 +1,49 @@
+.app-spacer {
+  flex: 1 1 auto;
+}
+
+
+.app-toolbar {
+  background: forestgreen;
+  color: white;
+  height: 50px;
+}
+
+
+
+
+.app-sidenav {
+  padding-top: 80px;
+  background: forestgreen;
+
+  .mat-button-toggle {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px 20px;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+
+    &:hover, &.mat-button-toggle-checked {
+      color: #fff;
+      background-color: #007bff;
+    }
+
+    mat-icon {
+      margin-right: 10px;
+    }
+  }
+
+  .homepage_button { /* Specific styles for the homepage button, if needed */ }
+  .dashboard_button { /* Specific styles for the dashboard button, if needed */ }
+  .history_button { /* Specific styles for the history button, if needed */ }
+}
+
+
+

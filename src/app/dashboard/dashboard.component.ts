@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
+import {TemperatureSliderComponent} from "./temperature-slider/temperature-slider.component";
 
 
 @Component({
@@ -7,10 +8,11 @@ import {MatGridList, MatGridTile} from "@angular/material/grid-list";
   standalone: true,
   imports: [
     MatGridList,
-    MatGridTile
+    MatGridTile,
+    TemperatureSliderComponent
   ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
 }

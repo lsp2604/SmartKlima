@@ -3,16 +3,16 @@
   <mat-toolbar class="app-toolbar">
     <button mat-raised-button color="accent" class="menu-button" aria-label="Menü öffnen" (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
+      <span>SmartKlima</span>
     </button>
-    <span>Meine App</span>
   </mat-toolbar>
   <mat-sidenav #drawer class="app-sidenav" mode="side" >
     <mat-nav-list>
-      <mat-button-toggle class="homepage_button" routerLink="homepage" (click)="drawer.toggle()">Startseite</mat-button-toggle>
+      <mat-button-toggle class="homepage_button" routerLink="homepage" (click)="drawer.close()">Startseite</mat-button-toggle>
       <div fxflex></div>
-      <mat-button-toggle class="dashboard_button" routerLink="dashboard" (click)="drawer.toggle()">Dashboard</mat-button-toggle>
+      <mat-button-toggle class="dashboard_button" routerLink="dashboard" (click)="drawer.close()">Dashboard</mat-button-toggle>
       <div fxFlex></div>
-      <mat-button-toggle class="history_button" routerLink="history">History</mat-button-toggle>
+      <mat-button-toggle class="history_button" routerLink="history" (click)="drawer.close()">History</mat-button-toggle>
     </mat-nav-list>
   </mat-sidenav>
   <router-outlet>

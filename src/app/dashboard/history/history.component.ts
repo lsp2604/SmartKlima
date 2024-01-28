@@ -1,54 +1,85 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartService } from "../../Service/chart.service";
+import * as mdata from '../../assets/data.json';
+
 
 @Component({
   selector: 'app-history',
   standalone: true,
-    imports: [
-
-
-    ],
+  imports: [],
   templateUrl: './history.component.html',
   styleUrl: './history.component.css'
 })
 
-
-export class HistoryComponent implements OnInit{
-
-
-  title = 'ng-chart';
+export class HistoryComponent implements OnInit {
   chart: any = [];
 
-  constructor(@Optional() private chartservice:ChartService) {}
+  mockdata = mdata;
 
+  constructor(@Optional() private chartservice: ChartService) {
+  }
 
 
   ngOnInit() {
-    this.chartservice.fetchData().subscribe(res => {
-      console.log(res)
-    })
+    // Initialisieren Sie das Chart-Objekt
     this.chart = new Chart('canvas', {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [
-          {
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1,
-          },
-        ],
+        labels: [], // Initial leere Labels
+        datasets: [] // Initial leere Datensätze
       },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
+      // Weitere Konfigurationen...
     });
+
+    // Laden der Daten für die Sensoren
+    this.loadDataForSensors('TLM0100', 'TLM0101');
   }
 
+
+  loadDataForSensors(sensorId1: string, sensorId2: string) {
+    // Hilfsfunktion zum Filtern der Daten für einen bestimmten Sensor
+    const filterDataForSensor = (sensorId: string) => {
+      return this.mockdata.results[0].series[0].values.filter((data: any) => data[2] === sensorId);
+    }
+
+    // Daten für jeden Sensor filtern
+    const dataSensor1 = filterDataForSensor(sensorId1);
+    const dataSensor2 = filterDataForSensor(sensorId2);
+
+    // Hilfsfunktion zum Umformatieren der Zeitstempel
+    const formatTime = (timeString: string) => {
+      const date = new Date(timeString);
+      return date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
+    };
+
+    // Zeitlabels formatieren
+    const timeLabels = dataSensor1.map((data: any) => formatTime(data[0]));
+
+    // Setzen der Labels und Daten für das Chart
+    if (this.chart && this.chart.data) {
+      this.chart.data.labels = timeLabels;
+      this.chart.data.datasets = [
+        {
+          data: dataSensor1.map((data: any) => data[1]),
+          borderColor: '#3e95cd',
+          label: `Sensor ${sensorId1}`,
+          backgroundColor: 'rgba(93, 175, 89, 0.1)',
+          borderWidth: 3,
+        },
+        {
+          data: dataSensor2.map((data: any) => data[1]),
+          borderColor: '#FF0000',
+          label: `Sensor ${sensorId2}`,
+          backgroundColor: 'rgba(255, 0, 0, 0.1)',
+          borderWidth: 3,
+        }
+      ];
+      this.chart.update();
+    }
+  }
 }
+
+
+
 

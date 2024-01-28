@@ -7,6 +7,7 @@ const url = 'http://localhost:8086';
 const db = 'dev';
 const authToken = 'Z_MFie7YJz00jtknyzZwlZXLr1S6bFRyTVpWIpSA52tOPSEUhdmcWpM2J850QZSC2lmGay9A0a7-ePAzLeECBg==\n'; // Replace with your authentication token
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +19,10 @@ export class ChartService {
     // Define the headers with the authentication token
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${authToken}`,
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization',
+      'mode': 'cors',
     });
 
     // Build the full URL

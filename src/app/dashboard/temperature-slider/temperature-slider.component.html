@@ -1,19 +1,11 @@
-<mat-card class="temp-slider-result-card">
+<!-- temperature-slider.component.html -->
+<mat-card class="slider-card">
   <mat-card-content>
-    <h2>Result</h2>
-    <div class="temp-slider-label-container">
-      <label id="temp-slider-name-label" class="temp-slider-name-label">Value</label>
-      <label class="temp-slider-value-label">{{ slider.value }}</label>
+    <h2>Slider Beispiel</h2>
+    <div class="slider-container">
+      <!-- Fügen Sie (ngModelChange) und den MatSliderChange-Typ hinzu -->
+      <input type="range" id="slider" min="1" max="100" [(ngModel)]="simpleSliderValue" (ngModelChange)="onSimpleSliderChange($event)">
+      <span id="slider-value">{{ simpleSliderValue }}</span>
     </div>
-    <mat-slider
-      class="temp-slider-margin custom-slider"
-      [disabled]="disabled"
-      [max]="max"
-      [min]="min"
-      [step]="step"
-      [discrete]="thumbLabel"
-      [showTickMarks]="showTicks">
-      <input matSliderThumb [(ngModel)]="value" #slider>
-    </mat-slider>
   </mat-card-content>
 </mat-card>

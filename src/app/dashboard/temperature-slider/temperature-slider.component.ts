@@ -20,7 +20,9 @@ import { MatCardModule } from '@angular/material/card';
 })
 
 export class TemperatureSliderComponent {
-  simpleSliderValue = 50;
+  simpleSliderValue = 20;
+  outsideTemperature = 15;
+  insideTemperature = 22;
 
   onSimpleSliderChange(event: MatSliderChange): void {
     this.simpleSliderValue = event.value;

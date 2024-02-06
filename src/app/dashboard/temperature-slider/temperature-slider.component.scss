@@ -1,21 +1,39 @@
-body {
-  font-family: Arial, sans-serif;
+/* temperature-slider.component.scss */
+
+.slider-card {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  margin: 0;
-}
+  flex-direction: column;
+  align-items: flex-start; /* Links ausrichten */
+  padding: 20px; /* Optional: Füge einen äußeren Abstand hinzu */
 
-.slider-container {
-  text-align: center;
-
-  input {
-    width: 80%;
+  .temperature-display {
+    text-align: center;
+    padding: 10px;
+    border: 2px solid #2196F3;
+    border-radius: 8px;
     margin-bottom: 20px;
+    width: 100%; /* Breite auf 100% setzen */
+
+    h3 {
+      margin: 0;
+      font-size: 1.2em;
+    }
+
+    span {
+      font-size: 1.5em;
+    }
   }
 
-  span {
-    font-size: 1.5em;
+  .slider-container {
+    text-align: center;
+
+    input {
+      width: 80%;
+      margin-bottom: 20px;
+    }
+
+    span {
+      font-size: 1.5em;
+    }
   }
 }

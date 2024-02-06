@@ -21,6 +21,7 @@
     "@angular/router": "^17.1.0",
     "@influxdata/influxdb-client": "^1.33.2",
     "chart.js": "^4.4.1",
+    "chartjs": "^0.3.24",
     "dotenv": "^16.4.1",
     "rxjs": "~7.8.0",
     "theme": "^0.1.0",

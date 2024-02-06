@@ -1,10 +1,19 @@
-<!-- temperature-slider.component.html -->
 <mat-card class="slider-card">
   <mat-card-content>
-    <h2>Slider Beispiel</h2>
+    <div class="temperature-display">
+      <h3>Temperatur Draußen</h3>
+      <span>{{ outsideTemperature }}°C</span>
+    </div>
+
+    <div class="temperature-display">
+      <h3>Temperatur Drinnen</h3>
+      <span>{{ insideTemperature }}°C</span>
+    </div>
+
+    <h2>Gewünschte Temperatur</h2>
+
     <div class="slider-container">
-      <!-- Fügen Sie (ngModelChange) und den MatSliderChange-Typ hinzu -->
-      <input type="range" id="slider" min="1" max="100" [(ngModel)]="simpleSliderValue" (ngModelChange)="onSimpleSliderChange($event)">
+      <input type="range" id="slider" min="0" max="30" [(ngModel)]="simpleSliderValue" (ngModelChange)="onSimpleSliderChange($event)">
       <span id="slider-value">{{ simpleSliderValue }}</span>
     </div>
   </mat-card-content>

@@ -1,7 +1,7 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartService } from "../../Service/chart.service";
-import * as mdata from '../../assets/data.json';
+import * as mdata from '../../../assets/data.json';
 
 
 @Component({

@@ -1,0 +1,30 @@
+.weather-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 20px;
+  background-color: #f9f9f9;
+}
+
+.weather-heading {
+  font-size: 24px;
+  color: #333;
+}
+
+.weather-detail {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #666;
+
+  &.temperature {
+    color: #e57373;
+  }
+
+  &.condition {
+    color: #64b5f6;
+  }
+}

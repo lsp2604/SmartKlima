@@ -1,0 +1,5 @@
+<div *ngIf="weather" class="weather-container">
+  <h2 class="weather-heading">{{ weather.name }} Wetter</h2>
+  <p class="weather-detail temperature">Temperatur: {{ weather.main.temp }}°C</p>
+  <p class="weather-detail condition">Zustand: {{ weather.weather[0].description }}</p>
+</div>

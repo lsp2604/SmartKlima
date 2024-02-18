@@ -1,8 +1,11 @@
 .test {
+  display: flex;
   width: 400px;
   height: 200px;
   margin: 20px;
-  display: flex;
   border-radius: 20px;
   background: #83aef4;
+  justify-content: center;
+  align-items: center;
 }
+

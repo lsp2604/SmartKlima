@@ -1,7 +1,12 @@
+
 <table>
   <tr>
     <td>Topic: </td>
-    <td><input [(ngModel)]="topicname" type="text" /></td>
+    <select [(ngModel)]="topicname">
+      <option value="#">#</option>
+      <option value="v3/fhdw-gl-smart-campus@ttn/devices/eui-a81758fffe088b90/down/replace">down/replace</option>
+      <option value="v3/fhdw-gl-smart-campus@ttn/devices/eui-a81758fffe088b90/up">up</option>
+    </select>
     <td><button type="button" (click)="subscribeNewTopic()">Subscribe Topic</button></td>
   </tr>
   <tr>
@@ -12,9 +17,11 @@
   <tr>
     <td></td>
     <td>&nbsp;&nbsp;<button type="button" (click)="clear()">Clear Log</button></td>
+    <td>&nbsp;&nbsp;<button type="button" (click)="endSubscription()">End Subscribtion</button></td>
     <td></td>
   </tr>
 </table>
 <br /><br />
 <div #msglog>
 </div>
+

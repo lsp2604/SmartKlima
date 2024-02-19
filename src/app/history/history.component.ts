@@ -1,7 +1,7 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import Chart from 'chart.js/auto';
-import { ChartService } from "../../Service/chart.service";
-import * as mdata from '../../../assets/data.json';
+import { ChartService } from "../Service/chart.service";
+import * as mdata from '../../assets/data.json';
 
 
 @Component({
@@ -22,6 +22,10 @@ export class HistoryComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log('HistoryComponent initialized');
+    console.log(this.chartservice.fetchData());
+    console.log('-----------------------------');
+
     // Initialisieren Sie das Chart-Objekt
     this.chart = new Chart('canvas', {
       type: 'line',

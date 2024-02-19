@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent} from "./dashboard/dashboard.component";
 import {HomepageComponent} from "./homepage/homepage.component";
-import {HistoryComponent} from "./dashboard/history/history.component";
+import {HistoryComponent} from "./history/history.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },

@@ -1,9 +1,7 @@
-
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, OnDestroy, Optional} from '@angular/core';
 import { Subscription } from 'rxjs';
 import {IMqttMessage, IMqttServiceOptions, MqttService} from 'ngx-mqtt';
 import {FormsModule} from "@angular/forms";
-
 
 @Component({
   selector: 'app-downlink',
@@ -15,22 +13,20 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './downlink.component.scss'
 })
 
-export class DownlinkComponent implements OnInit, OnDestroy {
-
+export class DownlinkComponent implements OnInit, OnDestroy{
   private subscription: Subscription = new Subscription();
   topicname: any;
   msg: any;
   isConnected: boolean = false;
-  @ViewChild('msglog', { static: true }) msglog: ElementRef;
+  @ViewChild('msglog', { static: true }) msglog!: ElementRef;
 
   constructor(private _mqttService: MqttService) {
-    this.msglog = new ElementRef(null);
   }
 
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.endSubscription();
   }
 
 
@@ -46,8 +42,8 @@ export class DownlinkComponent implements OnInit, OnDestroy {
 
   sendmsg(): void {
     // use unsafe publish for non-ssl websockets
-    this._mqttService.unsafePublish(this.topicname, this.msg, { qos: 1, retain: true })
-    this.msg = ''
+    this._mqttService.unsafePublish(this.topicname, this.msg, { qos: 1, retain: true});
+    this.msg = '';
   }
 
   logMsg(message: string): void {
@@ -57,4 +53,15 @@ export class DownlinkComponent implements OnInit, OnDestroy {
   clear(): void {
     this.msglog.nativeElement.innerHTML = '';
   }
+
+  endSubscription(): void {
+    this.subscription.unsubscribe();
+    this.logMsg('unsubscribed from topic: ' + this.topicname)
+  }
+
 }
+
+
+
+
+

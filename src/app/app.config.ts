@@ -3,7 +3,18 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import {provideAnimations} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
+import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
+
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: 'localhost',
+  port: 9999,
+  path: '/mqtt',
+  username: 'lsp',
+  password: 'SmartKlima',
+  clientId: '333'
+
+};
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimations(), importProvidersFrom(HttpClientModule)]
+  providers: [provideRouter(routes), provideAnimations(), importProvidersFrom(HttpClientModule),importProvidersFrom(MqttModule.forRoot(MQTT_SERVICE_OPTIONS))]
 };

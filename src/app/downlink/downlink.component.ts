@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild, ElementRef, OnDestroy, Optional} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, OnDestroy} from '@angular/core';
 import { Subscription } from 'rxjs';
-import {IMqttMessage, IMqttServiceOptions, MqttService} from 'ngx-mqtt';
+import {IMqttMessage, MqttService} from 'ngx-mqtt';
 import {FormsModule} from "@angular/forms";
 
 @Component({

@@ -1,11 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
-const influxQuery = `SELECT "temperature", "sensor_id" FROM "airSensors" WHERE ("sensor_id" = 'TLM0100' OR "sensor_id" = 'TLM0101') AND time >= '2024-01-24T11:30:00Z' AND time <= '2024-01-24T12:30:00Z`;
+// const influxQuery = `SELECT "temperature", "sensor_id" FROM "airSensors" WHERE ("sensor_id" = 'TLM0100' OR "sensor_id" = 'TLM0101') AND time >= '2024-01-24T11:30:00Z' AND time <= '2024-01-24T12:30:00Z`;
+const influxQuery = `SELECT "uplink_message_decoded_payload_temperature" FROM "test"."autogen"."mqtt_consumer" `;
 const url = 'http://localhost:8086';
-const db = 'dev';
-const authToken = 'Z_MFie7YJz00jtknyzZwlZXLr1S6bFRyTVpWIpSA52tOPSEUhdmcWpM2J850QZSC2lmGay9A0a7-ePAzLeECBg==\n'; // Replace with your authentication token
+const db = 'test';
+const authToken = '8iyOClKQdBcQUhvZHPNtFHtxUfHXJFbJ71-3nM-S0qFidWPT_yIh6f21UC0p6OvzGFSY6vNBRiPwWtKwqslqjA=='; // Replace with your authentication token
+
+// SELECT mean("uplink_message_decoded_payload_temperature") AS temp
+// FROM "test"."autogen"."mqtt_consumer"
+// WHERE time >= now() - 24h AND time <= now()
+// GROUP BY time(20m)
 
 
 @Injectable({
@@ -29,6 +35,6 @@ export class ChartService {
     const fullUrl = `${url}/query?db=${db}&q=${influxQuery}`;
 
     // Make the HTTP GET request with the headers
-    return this.http.get(fullUrl, { headers });
+    return this.http.get(fullUrl, {headers});
   }
 }

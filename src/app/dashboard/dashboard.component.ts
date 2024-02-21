@@ -5,8 +5,7 @@ import { TempOutComponent } from "./temp-out/temp-out.component";
 import { TempReglerComponent } from './temp-regler/temp-regler.component';
 import { UrlaubsNachtmodusComponent } from './urlaubs-nachtmodus/urlaubs-nachtmodus.component';
 import { RuhemodusComponent } from './ruhemodus/ruhemodus.component';
-import {DownlinkComponent} from "../downlink/downlink.component";
-
+import { DownlinkComponent } from "../downlink/downlink.component";
 
 @Component({
     selector: 'app-dashboard',
@@ -21,7 +20,7 @@ import {DownlinkComponent} from "../downlink/downlink.component";
         TempReglerComponent,
         UrlaubsNachtmodusComponent,
         RuhemodusComponent,
-        DownlinkComponent
+        DownlinkComponent,
     ]
 })
 export class DashboardComponent {

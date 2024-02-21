@@ -1,40 +1,46 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { InfluxDB } from '@influxdata/influxdb-client';
+import { Observable } from 'rxjs';
 
-// const influxQuery = `SELECT "temperature", "sensor_id" FROM "airSensors" WHERE ("sensor_id" = 'TLM0100' OR "sensor_id" = 'TLM0101') AND time >= '2024-01-24T11:30:00Z' AND time <= '2024-01-24T12:30:00Z`;
-const influxQuery = `SELECT "uplink_message_decoded_payload_temperature" FROM "test"."autogen"."mqtt_consumer" `;
-const url = 'http://localhost:8086';
-const db = 'test';
-const authToken = '8iyOClKQdBcQUhvZHPNtFHtxUfHXJFbJ71-3nM-S0qFidWPT_yIh6f21UC0p6OvzGFSY6vNBRiPwWtKwqslqjA=='; // Replace with your authentication token
-
-// SELECT mean("uplink_message_decoded_payload_temperature") AS temp
-// FROM "test"."autogen"."mqtt_consumer"
-// WHERE time >= now() - 24h AND time <= now()
-// GROUP BY time(20m)
-
+const url = 'http://localhost:8086'; // InfluxDB server URL
+const token = '8iyOClKQdBcQUhvZHPNtFHtxUfHXJFbJ71-3nM-S0qFidWPT_yIh6f21UC0p6OvzGFSY6vNBRiPwWtKwqslqjA=='; // InfluxDB authentication token
+const org = 'SmartKlima_FHDW'; // Your organization - adjust as needed
+const bucket = 'test'; // Your bucket - adjust as needed
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChartService {
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   fetchData(): Observable<any> {
-    // Define the headers with the authentication token
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${authToken}`,
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization',
-      'mode': 'cors',
+    // Example: Aggregate windows every 1 hour
+    const windowPeriod = '1h';
+
+    const query = `from(bucket: "${bucket}")
+      |> range(start: -240h)
+      |> filter(fn: (r) => r["_measurement"] == "mqtt_consumer")
+      |> filter(fn: (r) => r["_field"] == "uplink_message_decoded_payload_temperature")
+      |> aggregateWindow(every: ${windowPeriod}, fn: mean, createEmpty: false)
+      |> yield(name: "Measurements")`;
+
+    const influxDB = new InfluxDB({ url, token });
+    const queryApi = influxDB.getQueryApi(org);
+
+    return new Observable(observer => {
+      queryApi.queryRows(query, {
+        next(row, tableMeta) {
+          const o = tableMeta.toObject(row);
+          observer.next(o);
+        },
+        error(error) {
+          observer.error(error);
+        },
+        complete() {
+          observer.complete();
+        },
+      });
     });
-
-    // Build the full URL
-    const fullUrl = `${url}/query?db=${db}&q=${influxQuery}`;
-
-    // Make the HTTP GET request with the headers
-    return this.http.get(fullUrl, {headers});
   }
 }

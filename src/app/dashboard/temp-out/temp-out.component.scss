@@ -163,7 +163,7 @@
   left: 22px;
   bottom: -3px;
   font-weight: 700;
-  font-size: 54px;
+  font-size: 30px;
   line-height: 77px;
   color: rgba(87, 77, 51, 1);
 }
@@ -173,4 +173,9 @@
   font-size: 13px;
   line-height: 134.49%;
   color: rgba(87, 77, 51, 0.66);
+}
+
+.weather-icon {
+  width: 150px;
+  height: auto;
 }

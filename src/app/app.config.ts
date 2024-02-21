@@ -16,5 +16,5 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
 };
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimations(), importProvidersFrom(HttpClientModule),importProvidersFrom(MqttModule.forRoot(MQTT_SERVICE_OPTIONS))]
+  providers: [provideRouter(routes), provideAnimations(), importProvidersFrom(HttpClientModule),importProvidersFrom(MqttModule.forRoot(MQTT_SERVICE_OPTIONS)),]
 };

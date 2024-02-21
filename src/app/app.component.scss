@@ -1,4 +1,13 @@
 
+mat-sidenav-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
 
 
 .app-toolbar {
@@ -12,17 +21,6 @@
   color: #fff;
   border: none;
 
-}
-
-.menu-button {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-
-  &:hover {
-    color: #8ef;
-    transform: scale(1.05); /* Leichte Vergrößerung */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Verstärkter Schatten */
-  }
 }
 
 
@@ -72,13 +70,30 @@
 
 
   }
-
-  .homepage_button { /* Specific styles for the homepage button, if needed */ }
-  .dashboard_button { /* Specific styles for the dashboard button, if needed */ }
-  .history_button { /* Specific styles for the history button, if needed */ }
 }
 
 
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
 
+.app-sidenav {
+  width: 250px; /* Adjust based on your desired sidenav width */
+}
 
+.app-content {
+  flex-grow: 1;
+  padding: 20px; /* Adjust padding as needed */
+}
 
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .app-sidenav {
+    position: absolute;
+  }
+  .app-sidenav.mode-over {
+    width: 100%;
+  }
+}

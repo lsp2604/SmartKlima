@@ -1,4 +1,4 @@
-<mat-sidenav-container class="app-container" autosize [hasBackdrop]="true" fullscreen>
+<mat-sidenav-container class="app-container" autosize [hasBackdrop]="true" >
 
   <mat-toolbar class="app-toolbar">
     <button mat-raised-button color="accent" class="menu-button" aria-label="Menü öffnen" (click)="drawer.toggle()">
@@ -9,9 +9,7 @@
   <mat-sidenav #drawer class="app-sidenav" mode="side" >
     <mat-nav-list>
       <mat-button-toggle class="homepage_button" routerLink="homepage" (click)="drawer.close()">Startseite<span></span></mat-button-toggle>
-      <div fxflex></div>
       <mat-button-toggle class="dashboard_button" routerLink="dashboard" (click)="drawer.close()">Dashboard<span></span></mat-button-toggle>
-      <div fxFlex></div>
       <mat-button-toggle class="history_button" routerLink="history" (click)="drawer.close()">History<span></span></mat-button-toggle>
     </mat-nav-list>
   </mat-sidenav>

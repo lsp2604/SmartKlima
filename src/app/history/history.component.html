@@ -1,3 +1,21 @@
-<div>
+<mat-toolbar class="mat-toolbar">
+  <form>
+    <mat-toolbar class="mat-toolbar">
+      <mat-form-field appearance="fill">
+        <mat-label>Select a chart</mat-label>
+        <mat-select [(ngModel)]="selectedOption" (selectionChange)="onSelectionChange($event)" name="chartSelect">
+          <mat-option *ngFor="let timerage of timeranges" [value]="timeranges">{{chart.viewValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-toolbar>
+  </form>
+
+</mat-toolbar>
+
+
+<div class="chart">
   <canvas id="canvas">{{chart}}</canvas>
 </div>
+
+
+

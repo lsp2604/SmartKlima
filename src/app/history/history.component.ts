@@ -2,6 +2,7 @@ import {Component, OnInit, Optional} from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartService } from "../Service/chart.service";
 import * as mdata from '../../assets/data.json';
+import {toArray} from "rxjs";
 
 
 @Component({
@@ -37,50 +38,32 @@ export class HistoryComponent implements OnInit {
     });
 
     // Laden der Daten für die Sensoren
-    this.loadDataForSensors('TLM0100', 'TLM0101');
+    this.loadDataForSensors();
   }
 
 
-  loadDataForSensors(sensorId1: string, sensorId2: string) {
-    // Hilfsfunktion zum Filtern der Daten für einen bestimmten Sensor
-    const filterDataForSensor = (sensorId: string) => {
-      return this.mockdata.results[0].series[0].values.filter((data: any) => data[2] === sensorId);
-    }
-
-    // Daten für jeden Sensor filtern
-    const dataSensor1 = filterDataForSensor(sensorId1);
-    const dataSensor2 = filterDataForSensor(sensorId2);
-
-    // Hilfsfunktion zum Umformatieren der Zeitstempel
-    const formatTime = (timeString: string) => {
-      const date = new Date(timeString);
-      return date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
-    };
-
-    // Zeitlabels formatieren
-    const timeLabels = dataSensor1.map((data: any) => formatTime(data[0]));
-
-    // Setzen der Labels und Daten für das Chart
-    if (this.chart && this.chart.data) {
-      this.chart.data.labels = timeLabels;
-      this.chart.data.datasets = [
-        {
-          data: dataSensor1.map((data: any) => data[1]),
-          borderColor: '#3e95cd',
-          label: `Sensor ${sensorId1}`,
-          backgroundColor: 'rgba(93, 175, 89, 0.1)',
-          borderWidth: 3,
-        },
-        {
-          data: dataSensor2.map((data: any) => data[1]),
-          borderColor: '#FF0000',
-          label: `Sensor ${sensorId2}`,
-          backgroundColor: 'rgba(255, 0, 0, 0.1)',
-          borderWidth: 3,
-        }
-      ];
+  loadDataForSensors() {
+    this.chartservice.fetchData().pipe(
+      toArray() // This collects all emitted items into an array
+    ).subscribe((dataArray: any[]) => {
+      // Now 'dataArray' is guaranteed to be an array
+      this.chart.data.labels = dataArray.map((d: any) => this.formatTime(d._time));
+      this.chart.data.datasets = [{
+        label: 'Temperatur',
+        data: dataArray.map((d: any) => d._value),
+        borderColor: 'red',
+        fill: false
+      }];
       this.chart.update();
-    }
+    });
+  }
+
+
+  formatTime(dateInput: string): string {
+    const date = new Date(dateInput);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
   }
 }
 

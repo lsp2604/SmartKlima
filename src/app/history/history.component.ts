@@ -1,27 +1,19 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import Chart from 'chart.js/auto';
-import { ChartService } from "../Service/chart.service";
+import {ChartService} from "../Service/chart.service";
 import {toArray} from "rxjs";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption} from "@angular/material/autocomplete";
-import {MatSelect, MatSelectChange} from "@angular/material/select";
+import {MatSelect} from "@angular/material/select";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInput} from "@angular/material/input";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
-import {MatMenuTrigger} from "@angular/material/menu";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatIconButton} from "@angular/material/button";
 import {DatePickerComponent} from "./date-picker/date-picker.component";
-import {MatDialog} from "@angular/material/dialog";
-import {MatDialogRef} from "@angular/material/dialog";
-
-
-
-interface timeRanges {
-  value: string;
-  viewValue: string;
-}
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-history',
@@ -42,7 +34,9 @@ interface timeRanges {
     MatIconButton,
     DatePickerComponent,
     FormsModule,
-    MatSelect
+    MatSelect,
+    MatMenu,
+    MatMenuItem
   ],
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss'
@@ -50,18 +44,15 @@ interface timeRanges {
 
 
 export class HistoryComponent implements OnInit {
-  timeranges: timeRanges[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
+
+
 
 
 
   chart: any = [];
-  selectedOption: any;
   constructor(@Optional() private chartservice: ChartService, public dialog:MatDialog) {}
   ngOnInit() {
+
     // Initialisieren Sie das Chart-Objekt
     this.chart = new Chart('canvas', {
       type: 'line',
@@ -71,10 +62,12 @@ export class HistoryComponent implements OnInit {
       },
     });
     // Laden der Daten für die Sensoren
-    this.loadDataForSensors();
+    const start = "-24h"
+    const end = "now()"
+    this.loadDataForSensors(start, end);
   }
-  loadDataForSensors() {
-    this.chartservice.fetchData().pipe(
+  loadDataForSensors(start:string, end:string) {
+    this.chartservice.fetchData(start, end).pipe(
       toArray() // This collects all emitted items into an array
     ).subscribe((dataArray: any[]) => {
       // Now 'dataArray' is guaranteed to be an array
@@ -95,20 +88,31 @@ export class HistoryComponent implements OnInit {
     return `${hours}:${minutes}`;
   }
 
-  onSelectionChange(event: MatSelectChange) {
-    if (event.value === 'custom') {
+  onSelectionChange(value:string) {
+    if (value === 'custom') {
       this.openDatePicker();
+    }
+    else {
+      const start = value;
+      const end = "now()"
+      this.loadDataForSensors(start, end);
     }
   }
 
   openDatePicker() {
-    const dialogRef = this.dialog.open(DatePickerComponent, {
-      width: '250px'
-    });
+    const dialogConfig = new MatDialogConfig();
+    const start = new Date()
+    const end = new Date()
+    dialogConfig.data = {start, end};
+
+    dialogConfig.height = '50vw';
+    dialogConfig.width = '75vh';
+    const dialogRef = this.dialog.open(DatePickerComponent, dialogConfig);
+
 
     dialogRef.afterClosed().subscribe((result: any) => {
       console.log('The dialog was closed', result);
-      // Here, you can handle the result, e.g., setting the date range for your application
+      this.loadDataForSensors(result.start, result.end);
     });
 
   }

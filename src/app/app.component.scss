@@ -37,6 +37,7 @@ mat-sidenav-container {
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+    background: transparent;
 
     span {
       position: absolute;
@@ -49,6 +50,7 @@ mat-sidenav-container {
       transform: scaleX(0);
       opacity: 0;
       transition: transform 0.5s, opacity 0.5s;
+
     }
 
     &:hover {
@@ -73,6 +75,7 @@ mat-sidenav-container {
   display: flex;
   height: 100vh;
   width: 100vw;
+  background: #171717;
 }
 
 .app-sidenav {
@@ -93,3 +96,17 @@ mat-sidenav-container {
     width: 100%;
   }
 }
+
+.menu-button {
+  background-color: transparent !important;
+  box-shadow: none;
+
+}
+
+.menu-button:hover {
+  background-color: transparent !important;
+  box-shadow: none;
+}
+
+
+

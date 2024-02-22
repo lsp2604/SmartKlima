@@ -14,12 +14,12 @@ export class ChartService {
 
   constructor() { }
 
-  fetchData(): Observable<any> {
+  fetchData(start:string, end:string): Observable<any> {
     // Example: Aggregate windows every 1 hour
     const windowPeriod = '20m';
 
     const query = `from(bucket: "${bucket}")
-      |> range(start: -24h)
+      |> range(start: ${start}, stop: ${end})
       |> filter(fn: (r) => r["_measurement"] == "mqtt_consumer")
       |> filter(fn: (r) => r["_field"] == "uplink_message_decoded_payload_temperature")
       |> aggregateWindow(every: ${windowPeriod}, fn: mean, createEmpty: false)

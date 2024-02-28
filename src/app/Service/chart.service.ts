@@ -36,7 +36,7 @@ export class ChartService {
       'Content-Type': 'application/vnd.flux',
     }
 
-    const influxDB = new InfluxDB({ url, token, headers: headers});
+    const influxDB = new InfluxDB({ url, token});
     const queryApi = influxDB.getQueryApi(org);
 
 

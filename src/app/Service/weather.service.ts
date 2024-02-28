@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
+
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +10,9 @@ import { Observable } from 'rxjs';
 
 
 export class WeatherService {
-  private baseUrl: string = 'https://api.openweathermap.org/data/2.5/weather';
-  private apiKey: string = '7a7f0d24c850c8521dbae842820005db'; // Ersetze DEIN_API_KEY mit deinem tatsächlichen API-Schlüssel
+  private baseUrl: string = environment.weatherUrl
+  private apiKey: string = environment.weatherApiKey; // Ersetze DEIN_API_KEY mit deinem tatsächlichen API-Schlüssel
+
 
   constructor(private http: HttpClient) {}
 

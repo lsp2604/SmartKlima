@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DatePipe, NgIf, NgOptimizedImage} from "@angular/common";
 import {WeatherService} from "../../Service/weather.service";
-import { MatDivider } from '@angular/material/divider';
+import {MatDivider} from "@angular/material/divider";
 
 @Component({
   selector: 'app-temp-out',

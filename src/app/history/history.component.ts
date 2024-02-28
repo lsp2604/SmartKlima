@@ -60,6 +60,10 @@ export class HistoryComponent implements OnInit {
         labels: [], // Initial leere Labels
         datasets: [] // Initial leere Datensätze
       },
+      options: {
+        backgroundColor: 'blue',
+      }
+
     });
     // Laden der Daten für die Sensoren
     const start = "-24h"
@@ -76,7 +80,8 @@ export class HistoryComponent implements OnInit {
         label: 'Temperatur',
         data: dataArray.map((d: any) => d._value),
         borderColor: 'red',
-        fill: false
+        fill: false,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
       }];
       this.chart.update();
     });

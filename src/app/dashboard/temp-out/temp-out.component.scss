@@ -1,7 +1,7 @@
 .test {
   display: flex;
   width: 400px;
-  height: 200px;
+  height: 430px;
   margin: 20px;
   border-radius: 5px;
   background: transparent;
@@ -10,19 +10,15 @@
 }
 
 .card {
-  width: 310px;
-  height: 110px;
+  width: 133%;
+  height: 105%;
   position: relative;
   padding: 25px;
   background: radial-gradient(178.94% 106.41% at 26.42% 106.41%, #FFF7B1 0%, rgba(255, 255, 255, 0) 71.88%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, #FFFFFF;
   box-shadow: 0px 155px 62px rgba(0, 0, 0, 0.01), 0px 87px 52px rgba(0, 0, 0, 0.05), 0px 39px 39px rgba(0, 0, 0, 0.09), 0px 10px 21px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 23px;
+  border-radius:5px 5px;
   transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
   cursor: pointer;
-}
-
-.card:hover {
-  transform: scale(1.05);
 }
 
 .container {
@@ -40,28 +36,71 @@
 .card-header {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 25px;
+}
+
+.card-header-zwei {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 30%;
 }
 
 .card-header span:first-child {
   word-break: break-all;
   font-weight: 800;
-  font-size: 15px;
+  font-size: 25px;
   line-height: 135%;
   color: rgba(87, 77, 51, 0.66);
 }
 
 .card-header span:last-child {
   font-weight: 700;
-  font-size: 15px;
+  font-size: 20px;
+  line-height: 135%;
+  color: rgba(87, 77, 51, 0.33);
+}
+
+.card-header-zwei span:first-child {
+  word-break: break-all;
+  font-weight: 800;
+  font-size: 25px;
+  line-height: 135%;
+  color: rgba(87, 77, 51, 0.66);
+}
+
+.card-header-zwei span:last-child {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 135%;
+  color: rgba(87, 77, 51, 0.33);
+}
+
+.card-header-location {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.card-header-location span:first-child {
+  word-break: break-all;
+  font-weight: 800;
+  font-size: 25px;
+  line-height: 135%;
+  color: rgba(87, 77, 51, 0.66);
+}
+
+.card-header-location span:last-child {
+  font-weight: 700;
+  font-size: 20px;
   line-height: 135%;
   color: rgba(87, 77, 51, 0.33);
 }
 
 .temp {
   position: absolute;
-  left: 22px;
-  bottom: -3px;
+  left: 25px;
+  bottom: 20px;
   font-weight: 700;
   font-size: 45px;
   line-height: 77px;
@@ -78,4 +117,32 @@
 .weather-icon {
   width: 150px;
   height: auto;
+  position: absolute;
+  bottom: -315px;
+  left: 20px;
+}
+
+.tempIn {
+  position: absolute;
+  left: 25px;
+  bottom: 145px;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 77px;
+  color: rgba(87, 77, 51, 1);
+}
+
+.tempIn-scale span {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 134.49%;
+  color: rgba(87, 77, 51, 0.66);
+}
+
+.mat-divider {
+  height: 1%;
+  background-color: #323131;
+  margin-top: 12%;
+  margin-left: -8%;
+  margin-right: -8%;
 }

@@ -6,10 +6,21 @@
       </span>
     </div>
 
-    <div class="card-header">
-      <span>FHDW - Außenbereich<br>{{weather.name}}</span>
+    <div class="card-header-location">
+      <span>{{weather.name}}</span>
       <span>{{myDate | date: 'longDate' }}</span>
     </div>
+
+    <div class="card-header">
+      <mat-divider></mat-divider>
+      <span>Temperatur im FHDW Kino</span>
+    </div>
+
+    <div class="card-header-zwei">
+      <span>Temperatur</span>
+    </div>
+
+    <span class="tempIn">23°</span>
 
     <div class="temp">
       <span class="weather-detail temperature">{{ weather.main.temp }}°</span> <br>
@@ -17,3 +28,4 @@
 
   </div>
 </div>
+

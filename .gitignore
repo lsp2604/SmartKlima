@@ -45,5 +45,5 @@ Thumbs.db
 /token
 /src/app/x.html
 
-/src/.env
-./src/app/env
+
+/src/app/environments/environment.prod.ts

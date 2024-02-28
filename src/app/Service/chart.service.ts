@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { InfluxDB } from '@influxdata/influxdb-client';
 import { Observable } from 'rxjs';
 import  { environment} from "../environments/environment";
-import {HttpHeaders} from "@angular/common/http";
 
 const url = environment.influxUrl; // InfluxDB server URL
 const token = environment.influxToken; // InfluxDB authentication token
@@ -18,7 +17,7 @@ export class ChartService {
 
   fetchData(start:string, end:string): Observable<any> {
     // Example: Aggregate windows every 1 hour
-    const windowPeriod = '20m';
+    const windowPeriod = '60m';
 
     const query = `from(bucket: "${bucket}")
       |> range(start: ${start}, stop: ${end})
@@ -27,16 +26,8 @@ export class ChartService {
       |> aggregateWindow(every: ${windowPeriod}, fn: mean, createEmpty: false)
       |> yield(name: "Measurements")`;
 
-    const headers = {
-      'Allow-Origin': '*' , // Allow cross-origin resource sharing
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-      'Access-Control-Request-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-      'Mode': 'no-cors',
-      'Content-Type': 'application/vnd.flux',
-    }
 
-    const influxDB = new InfluxDB({ url, token});
+    const influxDB = new InfluxDB({ url, token,});
     const queryApi = influxDB.getQueryApi(org);
 
 

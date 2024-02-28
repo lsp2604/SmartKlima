@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { InfluxDB } from '@influxdata/influxdb-client';
 import { Observable } from 'rxjs';
+import  { environment} from "../environments/environment";
+import {HttpHeaders} from "@angular/common/http";
 
-const url = 'http://localhost:8086'; // InfluxDB server URL
-const token = '8iyOClKQdBcQUhvZHPNtFHtxUfHXJFbJ71-3nM-S0qFidWPT_yIh6f21UC0p6OvzGFSY6vNBRiPwWtKwqslqjA=='; // InfluxDB authentication token
-const org = 'SmartKlima_FHDW'; // Your organization - adjust as needed
-const bucket = 'test'; // Your bucket - adjust as needed
+const url = environment.influxUrl; // InfluxDB server URL
+const token = environment.influxToken; // InfluxDB authentication token
+const org = environment.influxOrg; // Your organization - adjust as needed
+const bucket = environment.influxBucket; // Your bucket - adjust as needed
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +27,18 @@ export class ChartService {
       |> aggregateWindow(every: ${windowPeriod}, fn: mean, createEmpty: false)
       |> yield(name: "Measurements")`;
 
-    const influxDB = new InfluxDB({ url, token });
+    const headers = {
+      'Allow-Origin': '*' , // Allow cross-origin resource sharing
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+      'Access-Control-Request-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+      'Mode': 'no-cors',
+      'Content-Type': 'application/vnd.flux',
+    }
+
+    const influxDB = new InfluxDB({ url, token, headers: headers});
     const queryApi = influxDB.getQueryApi(org);
+
 
     return new Observable(observer => {
       queryApi.queryRows(query, {

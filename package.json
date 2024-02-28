@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "prod": "ng serve --configuration=production"
   },
   "private": true,
   "dependencies": {
@@ -23,7 +24,7 @@
     "buffer": "^6.0.3",
     "chart.js": "^4.4.1",
     "chartjs": "^0.3.24",
-    "dotenv": "^16.4.1",
+    "dotenv": "^16.4.5",
     "ngx-gauge": "^9.0.0",
     "react-native-circular-slider": "^1.0.1",
     "react-native-svg": "^14.1.0",

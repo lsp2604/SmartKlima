@@ -14,6 +14,7 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatIconButton} from "@angular/material/button";
 import {DatePickerComponent} from "./date-picker/date-picker.component";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import { withInterceptors } from '@angular/common/http';
 
 @Component({
   selector: 'app-history',
@@ -61,9 +62,25 @@ export class HistoryComponent implements OnInit {
         datasets: [] // Initial leere Datensätze
       },
       options: {
-        backgroundColor: 'blue',
+        plugins: {
+        },
+        backgroundColor: 'red',
+        elements: {
+          
+        },
+        scales: {
+          x: {
+            grid:{
+              color: 'rgba(154, 154, 154, 10)'
+            }
+          },
+          y: {
+            grid:{
+              color: 'rgba(154, 154, 154, 10)'
+            }
+          }
       }
-
+      }
     });
     // Laden der Daten für die Sensoren
     const start = "-24h"
@@ -81,7 +98,6 @@ export class HistoryComponent implements OnInit {
         data: dataArray.map((d: any) => d._value),
         borderColor: 'red',
         fill: false,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
       }];
       this.chart.update();
     });

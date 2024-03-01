@@ -2,7 +2,7 @@
   <div class="container-range">
     <mat-toolbar class="mat-toolbar">
       <mat-form-field class="range-selector">
-        <mat-label>Cars</mat-label>
+        <mat-label>Timerange</mat-label>
         <select matNativeControl required #range (change)="onSelectionChange(range.value)">
           <option value="-6h">6h</option>
           <option value="-12h">12h</option>
@@ -15,8 +15,8 @@
   </div>
 
 
-  <div class="container-chart">
-    <canvas id="canvas">{{chart}}</canvas>
+  <div class="container-chart" style="background-color: #ffffff;">
+    <canvas id="canvas" style="background-color: #ffffff; padding: 100px;">{{chart}}</canvas>
   </div>
 </div>
 

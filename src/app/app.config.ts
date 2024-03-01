@@ -6,12 +6,12 @@ import {HttpClientModule} from "@angular/common/http";
 import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-  hostname: 'localhost',
-  port: 9999,
-  path: '/mqtt',
-  username: 'lsp',
-  password: 'SmartKlima',
-  clientId: '333'
+  hostname: '192.168.178.48',
+  port: 4827,
+  // path: '/mqtt',
+  // username: 'lsp',
+  // password: 'SmartKlima',
+  // clientId: '333'
 
 };
 

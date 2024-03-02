@@ -6,13 +6,15 @@ import {HttpClientModule} from "@angular/common/http";
 import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-  hostname: '192.168.178.48',
-  port: 4827,
-  // path: '/mqtt',
+  hostname: 'mqtt.lsplabs.de',
+  port: 8883,
+  path: '/mqtt',
+  // username: 'fhdw-gl-smart-campus@ttn',
+  // password: 'NNSXS.5PFB4Z35ZJHAPTNJWKNWQEQBDOEWMTKNNFGKWEY.RPHKKZ5ISAKQZQCGZI4TZB4OFGY7LREIPQASEN7FZ5IYTVKEMSUA',
+
   // username: 'lsp',
   // password: 'SmartKlima',
-  // clientId: '333'
-
+  clientId: 'Angular'
 };
 
 export const appConfig: ApplicationConfig = {

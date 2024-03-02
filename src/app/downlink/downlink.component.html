@@ -4,7 +4,7 @@
     <td>Topic: </td>
     <select [(ngModel)]="topicname">
       <option value="#">#</option>
-      <option value="v3/fhdw-gl-smart-campus@ttn/devices/eui-a81758fffe088b90/down/replace">down/replace</option>
+      <option value="v3/fhdw-gl-smart-campus@ttn/devices/eui-a81758fffe088b90/down/push">down/replace</option>
       <option value="v3/fhdw-gl-smart-campus@ttn/devices/eui-a81758fffe088b90/up">up</option>
     </select>
     <td><button type="button" (click)="subscribeNewTopic()">Subscribe Topic</button></td>
@@ -22,6 +22,6 @@
   </tr>
 </table>
 <br /><br />
-<div #msglog>
+<div #msglog class="msglog">
 </div>
 

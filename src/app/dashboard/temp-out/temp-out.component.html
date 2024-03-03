@@ -1,7 +1,8 @@
   <div class="card">
+
     <div *ngIf="weather" class="container">
       <span>
-        <img class="weather-icon" [src]="'http://openweathermap.org/img/w/' + weather.weather[0].icon + '.png'" alt="weather icon">
+        <img class="weather-icon" [src]="'http://openweathermap.org/img/wn/' + weather.weather[0].icon + '@4x.png'" alt="weather icon">
       </span>
     </div>
 
@@ -9,6 +10,10 @@
       <span>{{weather.name}}</span>
       <span>{{myDate | date: 'longDate' }}</span>
     </div>
+
+    <!-- <div class="calender-icon">
+      <mat-icon>calendar_today</mat-icon>
+    </div> -->
 
     <div class="card-header">
       <mat-divider></mat-divider>

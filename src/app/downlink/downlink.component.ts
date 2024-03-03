@@ -17,8 +17,10 @@ export class DownlinkComponent implements OnInit, OnDestroy{
   private subscription: Subscription = new Subscription();
   topicname: any;
   msg: any;
-  isConnected: boolean = false;
+  frm_payload = "";
+  pushtopicname = 'v3/fhdw-gl-smart-campus@ttn/devices/eui-a81758fffe088b90/down/push';
   @ViewChild('msglog', { static: true }) msglog!: ElementRef;
+
 
   constructor(private _mqttService: MqttService) {
   }
@@ -41,8 +43,10 @@ export class DownlinkComponent implements OnInit, OnDestroy{
   }
 
   sendmsg(): void {
+
+    this.msg ='{"downlinks":[{"frm_payload":"' + this.frm_payload + '"}]}';
     // use unsafe publish for non-ssl websockets
-    this._mqttService.unsafePublish(this.topicname, this.msg, { qos: 1, retain: true});
+    this._mqttService.unsafePublish(this.pushtopicname, this.msg, { qos: 1, retain: true});
     this.msg = '';
   }
 

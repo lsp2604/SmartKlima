@@ -1,7 +1,7 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import Chart from 'chart.js/auto';
 import {ChartService} from "../Service/chart.service";
-import {toArray} from "rxjs";
+import {min, toArray} from "rxjs";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
@@ -59,23 +59,26 @@ export class HistoryComponent implements OnInit {
       type: 'line',
       data: {
         labels: [], // Initial leere Labels
-        datasets: [] // Initial leere Datensätze
+        datasets: [],// Initial leere Datensätze
       },
       options: {
         plugins: {
         },
-        backgroundColor: 'red',
-        elements: {
-          
-        },
+        backgroundColor: 'purple',
         scales: {
           x: {
             grid:{
+              color: 'rgba(154, 154, 154, 10)'
+            }, 
+            ticks:{
               color: 'rgba(154, 154, 154, 10)'
             }
           },
           y: {
             grid:{
+              color: 'rgba(154, 154, 154, 10)'
+            },
+            ticks:{
               color: 'rgba(154, 154, 154, 10)'
             }
           }
@@ -96,12 +99,26 @@ export class HistoryComponent implements OnInit {
       this.chart.data.datasets = [{
         label: 'Temperatur',
         data: dataArray.map((d: any) => d._value),
-        borderColor: 'red',
+        borderColor: 'rgb(187, 134, 252)',
         fill: false,
       }];
+      let minDataValue = Number.POSITIVE_INFINITY;
+      let maxDataValue = Number.NEGATIVE_INFINITY;
+      dataArray.forEach((d: any) => {
+        const value = d._value;
+        if (value < minDataValue) {
+          minDataValue = value;
+        }
+        if (value > maxDataValue) {
+          maxDataValue = value;
+        }
+      });
+      this.chart.options.scales.y.min = Math.floor(minDataValue) - 1;
+      this.chart.options.scales.y.max = Math.ceil(maxDataValue) + 1;
       this.chart.update();
     });
   }
+
   formatTime(dateInput: string): string {
     const date = new Date(dateInput);
     const hours = date.getHours().toString().padStart(2, '0');

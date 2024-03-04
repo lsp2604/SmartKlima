@@ -6,6 +6,23 @@ import { UrlaubsNachtmodusComponent } from './urlaubs-nachtmodus/urlaubs-nachtmo
 import { RuhemodusComponent } from './ruhemodus/ruhemodus.component';
 import { DownlinkComponent } from "../downlink/downlink.component";
 
+
+const weatherOptions: NodeListOf<HTMLElement> = document.querySelectorAll('.weather-options__option');
+const controls: NodeListOf<HTMLElement> = document.querySelectorAll('.controls__tab');
+
+const power: HTMLElement | null = document.querySelector('.weather__power');
+const circleFill: HTMLElement | null = document.querySelector('.weather__circle-fill');
+const tempAmount: HTMLElement | null = document.querySelector('.weather__amount');
+const tempDegrees: HTMLElement | null = document.querySelector('.weather__degrees');
+const tempNull: HTMLElement | null = document.querySelector('.weather__null');
+
+const light: HTMLElement | null = document.getElementById('light');
+const shades: HTMLElement | null = document.getElementById('shades');
+const audio: HTMLElement | null = document.getElementById('audio');
+const coffee: HTMLElement | null = document.getElementById('coffee');
+const controlList: Array<HTMLElement | null> = [light, shades, audio, coffee];
+
+
 @Component({
     selector: 'app-dashboard',
     standalone: true,
@@ -24,3 +41,45 @@ import { DownlinkComponent } from "../downlink/downlink.component";
 export class DashboardComponent {
 }
 
+controls.forEach(control => {
+  control.addEventListener('click', (e) => {
+    control.classList.toggle('controls__tab--active');
+
+    let stateId: RegExpMatchArray | null = (e.currentTarget as HTMLElement).innerHTML.match('(?:id=\")[a-z]*(?:\")');
+    const id: string = stateId ? stateId[0].slice(4, -1) : '';
+
+    controlList.filter(elem => {
+      if(elem && elem.id == id) {
+        if(!control.classList.contains('controls__tab--active')) {
+          elem.textContent = 'OFF';
+        } else {
+          elem.textContent = 'ON';
+        }
+      }
+    })
+  })
+})
+
+weatherOptions.forEach(weatherOption => {
+  weatherOption.addEventListener('click', () => {
+    weatherOptions.forEach(option => {
+      option.classList.remove('weather-options__option--active');
+    })
+    weatherOption.classList.toggle('weather-options__option--active');
+  })
+})
+
+power?.addEventListener('click', () => {
+  circleFill?.classList.toggle('weather__circle-fill--on');
+  power.classList.toggle('weather__power--active');
+
+  if(tempNull?.textContent == '--') {
+    tempNull.textContent = '';
+    tempAmount ? tempAmount.textContent = '24\xB0' : null;
+    tempDegrees ? tempDegrees.textContent = 'Celsius' : null;
+  } else {
+    tempNull ? tempNull.textContent = '--' : null;
+    tempAmount ? tempAmount.textContent = '' : null;
+    tempDegrees ? tempDegrees.textContent = '' : null;
+  }
+})

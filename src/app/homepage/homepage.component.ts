@@ -23,14 +23,8 @@ import {FeatureCard3} from "../cards/feature-card3/feature-card3.component";
   styleUrl: './homepage.component.scss'
 })
 export class HomepageComponent {
-  constructor(private title: Title, private meta: Meta) {
-    this.title.setTitle('Gracious Beneficial Chimpanzee')
-    this.meta.addTags([
-      {
-        property: 'og:title',
-        content: 'Gracious Beneficial Chimpanzee',
-      },
-    ])
-  }
 
 }
+
+
+

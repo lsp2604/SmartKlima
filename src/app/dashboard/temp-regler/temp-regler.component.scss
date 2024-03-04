@@ -1,38 +1,37 @@
+.container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
+  height: 10vh;
+  margin-left: 322%;
+  margin-top: 172%;
+}
 
-.container .origin {
+.de .den, .de .dene, .de .denem, .de .deneme, .de .light, .de .dot {   // Positionierung aller Teile aufeinander
   position: absolute;
   left: 50%;
   top: 50%;
-  z-index: 111;
-  width: 2px;
-  height: 2px;
-  margin: -1px 0 0 -1px;
-  background-color: #f50;
 }
 
-.de {
+.de {                                   // Äußerster Schein
   user-select: none;
   position: relative;
-  width: 230px;
-  height: 230px;
+  width: 180px;
+  height: 180px;
   border-radius: 100%;
-  box-shadow: 0 0 25px rgba(0, 0, 0, .1);
+  box-shadow: 0 0 15px rgba(211, 198, 198, 0.1);
   background-color: transparent;
 }
 
-.de .den, .de .dene, .de .denem, .de .deneme, .de .light, .de .dot {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-}
-
-.den {
+.den {                                  // Dunkelgrauer Kreis
   position: relative;
-  width: 220px;
-  height: 220px;
-  margin: -110px 0 0 -110px;
+  width: 170px;
+  height: 170px;
+  margin: -85px 0 0 -85px;
   border-radius: 100%;
-  box-shadow: inset 0 3px 10px rgba(0, 0, 0, .6), 0 2px 20px rgba(255, 255, 255, 1);
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, .6), 0 2px 15px rgba(255, 255, 255, 1);
   background: #888888;
   background: -moz-radial-gradient(center, ellipse cover, #888888 0%, #333333 100%);
   background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #888888), color-stop(100%, #333333));
@@ -40,13 +39,13 @@
   background: -o-radial-gradient(center, ellipse cover, #888888 0%, #333333 100%);
 }
 
-.dene {
+.dene {                                 // Weißer Kreis
   z-index: 4;
-  width: 140px;
-  height: 140px;
-  margin: -70px 0 0 -70px;
+  width: 120px;
+  height: 120px;
+  margin: -60px 0 0 -60px;
   border-radius: 100%;
-  box-shadow: inset 0 2px 2px rgba(255, 255, 255, .4), 0 3px 13px rgba(0, 0, 0, .85);
+  box-shadow: inset 0 2px 2px rgba(255, 255, 255, .4), 0 3px 10px rgba(0, 0, 0, .85);
   background: #f2f6f5;
   background: -moz-linear-gradient(top, #f2f6f5 0%, #cbd5d6 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f2f6f5), color-stop(100%, #cbd5d6));
@@ -54,10 +53,10 @@
   background: -o-linear-gradient(top, #f2f6f5 0%, #cbd5d6 100%);
 }
 
-.denem {
-  width: 120px;
-  height: 120px;
-  margin: -60px 0 0 -60px;
+.denem {                                // Silberne Dünne Zwischenkreis-Linie
+  width: 100px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
   border-radius: 100%;
   background: #cbd5d6;
   background: -moz-linear-gradient(top, #cbd5d6 0%, #f2f6f5 100%);
@@ -66,18 +65,19 @@
   background: -o-linear-gradient(top, #cbd5d6 0%, #f2f6f5 100%);
 }
 
-.deneme {
-  width: 100px;
-  height: 100px;
-  margin: -50px 0 0 -50px;
+.deneme {                               // Oberster Kreis, Regler wo Punkt drauf ist
+  width: 80px;
+  height: 80px;
+  margin: -40px 0 0 -40px;
   border-radius: 100%;
-  box-shadow: inset 0 2px 3px rgba(255, 255, 255, .6), 0 8px 20px rgba(0, 0, 0, .9);
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, .6), 0 8px 15px rgba(0, 0, 0, .9);
   background: #eef7f6;
   background: -moz-linear-gradient(top, #eef7f6 0%, #8d989a 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eef7f6), color-stop(100%, #8d989a));
   background: -webkit-linear-gradient(top, #eef7f6 0%, #8d989a 100%);
   background: -o-linear-gradient(top, #eef7f6 0%, #8d989a 100%);
 }
+
 
 .den .switch {
   z-index: 3;

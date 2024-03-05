@@ -54,7 +54,7 @@ body {
 
 .weather {
   min-width: 250px;
-  width: 45%;
+  width: 40%;
   background: #fff;
   border-radius: 2px;
   padding: 12px;
@@ -160,7 +160,6 @@ body {
 }
 
 .controlls {
-  min-width:500px;
   width: 50%;
   margin-left:30px;
   float:right;
@@ -257,8 +256,8 @@ body {
   }
 }
 
-@media (max-width: 1000px) {
 
+@media (max-width: 1000px){
   .main__panel {
     padding: 0 12px;
   }
@@ -278,5 +277,6 @@ body {
   .fa-chevron-left {
     transform: rotate(-90deg);
   }
-
 }
+
+

@@ -150,10 +150,12 @@ body {
   padding: 12px;
   display: grid;
   flex-wrap: wrap;
-  grid-template-columns: 49% 49%;
+  grid-template-columns: 25% 25%;
   column-gap: 24px;
   row-gap: 24px;
-  &__tab {
+  margin-left: auto;
+
+  &__tab {                          // Einzelne 4 Kästchen
     cursor: pointer;
     padding: 8px;
     background: #fff;
@@ -215,7 +217,7 @@ body {
 
 .weather {
   min-width: 250px;
-  width: 40%;
+  width: 45%;
   background: #fff;
   border-radius: 2px;
   padding: 12px;

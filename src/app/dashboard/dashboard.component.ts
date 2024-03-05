@@ -5,6 +5,10 @@ import { TempReglerComponent } from './temp-regler/temp-regler.component';
 import { UrlaubsNachtmodusComponent } from './urlaubs-nachtmodus/urlaubs-nachtmodus.component';
 import { RuhemodusComponent } from './ruhemodus/ruhemodus.component';
 import { DownlinkComponent } from "../downlink/downlink.component";
+import {WeatherService} from "c:/Users/liqze/OneDrive - LANXESS Deutschland GmbH/Dokumente/SmartKlima/src/app/Service/weather.service";
+import {DatePipe, NgIf, NgOptimizedImage} from "@angular/common";
+import {MatDivider} from "@angular/material/divider";
+
 
 
 const weatherOptions: NodeListOf<HTMLElement> = document.querySelectorAll('.weather-options__option');
@@ -29,8 +33,10 @@ const controlList: Array<HTMLElement | null> = [light, shades, audio, coffee];
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
     imports: [
+        DatePipe,
         MatGridList,
         MatGridTile,
+        MatDivider,
         TempOutComponent,
         TempReglerComponent,
         UrlaubsNachtmodusComponent,
@@ -39,6 +45,33 @@ const controlList: Array<HTMLElement | null> = [light, shades, audio, coffee];
     ]
 })
 export class DashboardComponent {
+
+
+  constructor(private weatherService: WeatherService) {}
+
+  public weather: any;
+
+
+  myDate: Date = new Date();
+
+
+  ngOnInit() {
+    this.loadWeather('50.9856', '7.13298');
+  }
+
+  loadWeather(lat: string, lon:string) {
+    this.weatherService.getWeather(lat, lon).subscribe(
+      data => {
+        this.weather = data;
+        console.log(this.weather);
+
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+
 }
 
 controls.forEach(control => {

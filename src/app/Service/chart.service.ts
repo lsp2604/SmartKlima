@@ -13,18 +13,30 @@ const bucket = environment.influxBucket; // Your bucket - adjust as needed
 })
 export class ChartService {
 
+  query: string = '';
+
+
   constructor() { }
 
-  fetchData(start:string, end:string): Observable<any> {
+  fetchData(start:string, end:string, custom:boolean): Observable<any> {
     // Example: Aggregate windows every 1 hour
     const windowPeriod = '60m';
-
-    const query = `from(bucket: "${bucket}")
-      |> range(start: ${start}, stop: ${end})
-      |> filter(fn: (r) => r["_measurement"] == "mqtt_consumer")
-      |> filter(fn: (r) => r["_field"] == "uplink_message_decoded_payload_temperature")
-      |> aggregateWindow(every: ${windowPeriod}, fn: mean, createEmpty: false)
-      |> yield(name: "Measurements")`;
+    if(custom){
+      this.query = `from(bucket: "${bucket}")
+        |> range(start: ${start}, stop: ${end})
+        |> filter(fn: (r) => r["_measurement"] == "mqtt_consumer")
+        |> filter(fn: (r) => r["_field"] == "uplink_message_decoded_payload_temperature")
+        |> aggregateWindow(every: 1d, fn: mean, createEmpty: false)
+        |> yield(name: "Measurements")`;
+    }
+    else{
+      this.query = `from(bucket: "${bucket}")
+        |> range(start: ${start}, stop: ${end})
+        |> filter(fn: (r) => r["_measurement"] == "mqtt_consumer")
+        |> filter(fn: (r) => r["_field"] == "uplink_message_decoded_payload_temperature")
+        |> aggregateWindow(every: ${windowPeriod}, fn: mean, createEmpty: false)
+        |> yield(name: "Measurements")`;
+    }
 
 
     const influxDB = new InfluxDB({ url, token,});
@@ -32,7 +44,7 @@ export class ChartService {
 
 
     return new Observable(observer => {
-      queryApi.queryRows(query, {
+      queryApi.queryRows(this.query, {
         next(row, tableMeta) {
           const o = tableMeta.toObject(row);
           observer.next(o);

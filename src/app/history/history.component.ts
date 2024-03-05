@@ -45,11 +45,6 @@ import { withInterceptors } from '@angular/common/http';
 
 
 export class HistoryComponent implements OnInit {
-
-
-
-
-
   chart: any = [];
   constructor(@Optional() private chartservice: ChartService, public dialog:MatDialog) {}
   ngOnInit() {
@@ -88,14 +83,22 @@ export class HistoryComponent implements OnInit {
     // Laden der Daten für die Sensoren
     const start = "-24h"
     const end = "now()"
-    this.loadDataForSensors(start, end);
+    const custom = false;
+    this.loadDataForSensors(start, end, custom);
   }
-  loadDataForSensors(start:string, end:string) {
-    this.chartservice.fetchData(start, end).pipe(
+  loadDataForSensors(start:string, end:string, custom:boolean) {
+    this.chartservice.fetchData(start, end, custom).pipe(
       toArray() // This collects all emitted items into an array
     ).subscribe((dataArray: any[]) => {
       // Now 'dataArray' is guaranteed to be an array
-      this.chart.data.labels = dataArray.map((d: any) => this.formatTime(d._time));
+      // this.chart.data.labels = dataArray.map((d: any) => this.formatTime(d._time));
+      if(custom)
+      {
+          this.chart.data.labels = dataArray.map((d: any) => this.formatTimeToDate(d._time));
+      }
+      else{
+        this.chart.data.labels = dataArray.map((d: any) => this.formatTime(d._time));
+      }
       this.chart.data.datasets = [{
         label: 'Temperatur',
         data: dataArray.map((d: any) => d._value),
@@ -126,6 +129,15 @@ export class HistoryComponent implements OnInit {
     return `${hours}:${minutes}`;
   }
 
+  formatTimeToDate(dateInput: string): string {
+    const date = new Date(dateInput);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Monate werden von 0 bis 11 gezählt, deshalb +1
+    const year = date.getFullYear().toString();
+    return `${day}.${month}.${year}`;
+}
+
+
   onSelectionChange(value:string) {
     if (value === 'custom') {
       this.openDatePicker();
@@ -133,7 +145,8 @@ export class HistoryComponent implements OnInit {
     else {
       const start = value;
       const end = "now()"
-      this.loadDataForSensors(start, end);
+      const custom = false;
+      this.loadDataForSensors(start, end, custom);
     }
   }
 
@@ -141,16 +154,17 @@ export class HistoryComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     const start = new Date()
     const end = new Date()
+    const custom = true;
     dialogConfig.data = {start, end};
 
-    dialogConfig.height = '50vw';
+    dialogConfig.height = '7vw';
     dialogConfig.width = '75vh';
     const dialogRef = this.dialog.open(DatePickerComponent, dialogConfig);
 
 
     dialogRef.afterClosed().subscribe((result: any) => {
       console.log('The dialog was closed', result);
-      this.loadDataForSensors(result.start, result.end);
+      this.loadDataForSensors(result.start, result.end, custom);
     });
 
   }

@@ -1,18 +1,47 @@
-:host { 
-  display: contents; 
+:host {
+  display: contents;
 }
+/*.feature-card3-feature-card {*/
+/*  width: 100%;*/
+/*  display: flex;*/
+/*  padding: var(--dl-space-space-twounits);*/
+/*  align-items: center;*/
+/*  flex-direction: column;*/
+/*}*/
+
 .feature-card3-feature-card {
   width: 100%;
   display: flex;
   padding: var(--dl-space-space-twounits);
   align-items: center;
   flex-direction: column;
+  background: var(--dl-color-white);
+  border-radius: var(--dl-radius-radius-unit);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  margin-top: 10%;
 }
+
+.feature-card3-feature-card:hover {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
 .feature-card3-icon {
-  fill: var(--dl-color-gray-500);
-  width: var(--dl-size-size-small);
-  height: var(--dl-size-size-small);
+  font-size: 300px; /* Or any other size */
+  width: 300px; /* Match the width to the font-size for alignment purposes */
+  height: 300px; /* Match the height to the font-size */
+  line-height: 1; /* Adjust line-height for proper alignment */
 }
+
+.feature-card3-button {
+  margin-top: 5%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+}
+
 .feature-card3-text {
   font-style: normal;
   margin-top: var(--dl-space-space-unit);

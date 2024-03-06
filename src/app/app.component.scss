@@ -19,6 +19,7 @@ mat-sidenav-container {
   color: #fff;
   border: none;
   position: fixed;
+  z-index: 1000;
 }
 
 .app-sidenav {

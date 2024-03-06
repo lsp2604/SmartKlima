@@ -6,7 +6,8 @@
 .home-container {
   width: 100%;
   display: flex;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   min-height: 100vh;
   align-items: center;
   flex-direction: column;
@@ -22,11 +23,13 @@
   flex-direction: column;
   background-size: cover;
   justify-content: center;
+  background-position: center;
   background-image: url('../../assets/images/FHDW Bergisch Gladbach.webp');
 }
 
 .home-hero-font-background {
   margin-top: 100px;
+
 }
 .home-text {
   color: var(--dl-color-gray-white);
@@ -82,11 +85,11 @@
   text-align: center;
 }
 .home-container1 {
-  width: 100%;
   display: grid;
-  grid-gap: var(--dl-space-space-twounits);
+  //grid-gap: var(--dl-space-space-fourunits);
+  grid-gap: 5%;
   margin-top: var(--dl-space-space-fourunits);
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 @media(max-width: 991px) {
   .home-text3 {
@@ -107,6 +110,7 @@
   .home-features {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
+    background: transparent;
   }
   .home-text3 {
     text-align: center;
@@ -499,4 +503,5 @@ body {
   .fa-chevron-left {
     transform: rotate(-90deg);
   }
+
 }

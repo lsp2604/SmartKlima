@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import { TempOutComponent } from "./temp-out/temp-out.component";
 import { TempReglerComponent } from './temp-regler/temp-regler.component';
 import { UrlaubsNachtmodusComponent } from './urlaubs-nachtmodus/urlaubs-nachtmodus.component';
 import { RuhemodusComponent } from './ruhemodus/ruhemodus.component';
 import { DownlinkComponent } from "../downlink/downlink.component";
-import {WeatherService} from "c:/Users/liqze/OneDrive - LANXESS Deutschland GmbH/Dokumente/SmartKlima/src/app/Service/weather.service";
+import {WeatherService} from "../Service/weather.service";
 import {DatePipe, NgIf, NgOptimizedImage} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
 
@@ -41,10 +41,10 @@ const controlList: Array<HTMLElement | null> = [light, shades, audio, coffee];
         TempReglerComponent,
         UrlaubsNachtmodusComponent,
         RuhemodusComponent,
-        DownlinkComponent,
+        DownlinkComponent
     ]
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
 
   constructor(private weatherService: WeatherService) {}

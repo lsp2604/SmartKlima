@@ -20,13 +20,14 @@ $grey-light: #edf1f7;
 
 body {
   padding-top: 8vh;
-  font-family: Open Sans;
+  font-family: Open Sans, serif;
   height: 100vh;
   color: #030303;
   background: $grey-light;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: max-content auto;
+  overflow-y: scroll ;
 }
 
 .fas, .fab, .far {
@@ -188,7 +189,7 @@ body {
 .card-header-location {                     // Card Head Formatierung
   display: flex;
   flex-direction: column;
-  gap: 0px;
+  gap: 0;
 }
 
 .weather-content {
@@ -198,14 +199,16 @@ body {
 
 .weather-content-temp {
   display: grid !important;
-  grid-template-columns: 1fr 1fr 1fr !important;
+  grid-template-columns: 1fr 0 1fr;
   margin-top: 10%;
   justify-items: center;
-  //align-items: center; // Einkommentieren für center center ---> jetzt gerade center top
+  align-items: center; // Einkommentieren für center center ---> jetzt gerade center top
   height: 80%;
+  grid-template-areas: "left divider right"
 }
 
 .vertical-divider {
+  grid-area: divider;
   height: 100%;
   width: 3px;
   background-color: #3164ff7d;
@@ -215,12 +218,23 @@ body {
   border-color: blue;
 }
 
-.links {
+.content-left {
+  grid-area: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  gap: 10px;
+
 }
 
-.rechts {
+.content-right {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  gap: 10px;
 }
 
 .controlls {
@@ -300,7 +314,11 @@ body {
 
 @media (max-width: 576px){
   html{
-    padding-top: 15%;
+    width:100%;
+    max-width: 1120px;
+    height: 150px;
+    overflow: auto;
+    overflow-x: hidden;
   }
   .main__panel {
     padding: 0 12px;
@@ -313,7 +331,7 @@ body {
   }
   .weather {
     width: calc(100% - 24px);
-    margin: 0;
+    margin-bottom: 10%;
   }
   .main-section {
     flex-direction: column;
@@ -335,23 +353,15 @@ body {
     z-index: 100;
     display: flex;
     flex-direction: column;
-    gap: 0px;
-  }
-  .divider-container{
-     font-size: 1.5rem;
-     line-height: 135%;
-     letter-spacing: -0.1vw;
-  }
-  .divider-content{
-     padding: 20px;
-     height: 100%;
+    gap: 0;
   }
   .vertical-divider{
-     height: 230%;
-     width: 1.5px;
-     background-color: #000;
-     margin: 0 20px;
+    grid-area: divider;
+    height: 100%;
+    width: 3px;
+    background-color: #3164ff7d;
   }
+
 }
 
 
@@ -368,6 +378,7 @@ body {
   .weather {
     width: calc(100% - 24px);
     margin: 0;
+    margin-bottom: 10%;
   }
   .main-section {
     flex-direction: column;

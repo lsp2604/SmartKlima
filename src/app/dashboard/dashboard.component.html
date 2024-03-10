@@ -76,11 +76,17 @@
         <section class="weather-content">
           <div class="weather-content-temp">
             <div class="content-left">
-              Temperature Outside <br>
+              TEMPERATUR AUßEN <br>
               <span>{{weather.main.temp}}°C</span>
+              <span>
+                <img class="weather-icon" [src]="'http://openweathermap.org/img/wn/' + weather.weather[0].icon + '@4x.png'" alt="weather icon">
+              </span>
             </div>
             <div class="vertical-divider"></div>
-            <div class="content-right">Inhalt Rechts</div>
+            <div class="content-right">
+              TEMPERATUR INNEN <br>
+              <span>{{weather.main.temp}}°C</span>
+            </div>
           </div>
         </section>
       </section>

@@ -189,7 +189,7 @@ body {
   width: 45%;
   float:right;
   margin: 10px;
-  margin-top: 0px;
+  margin-top: 0;
   padding: 12px;
   display: grid;
   flex-wrap: wrap;
@@ -363,21 +363,21 @@ body {
   }
 }
 
-@media (min-width: 1440px) {
-  .weather, .Temp-Control, .controlls__tab {
-    min-width: 150px; // Adjust this to your preferred size
-    width: 60%; // You can adjust this percentage based on how much of the screen width you want the card to occupy
-    min-height: 500px; // Make cards taller
-    margin: 20px auto; // Center cards with automatic horizontal margins
-    padding: 30px; // Increase padding for a better look on larger screens
-  }
-
-  .card-header-location span, .content-left span, .content-right span {
-    // Increase the font size for better readability on larger screens
-    font-size: calc(1rem + 1vw); // This makes the font size responsive to the viewport width
-  }
-
-  // You can add additional styles here to adjust other elements as needed
-}
+//@media (min-width: 1440px) {
+//  .weather, .Temp-Control, .controlls__tab {
+//    min-width: 150px; // Adjust this to your preferred size
+//    width: 60%; // You can adjust this percentage based on how much of the screen width you want the card to occupy
+//    min-height: 500px; // Make cards taller
+//    margin: 20px auto; // Center cards with automatic horizontal margins
+//    padding: 30px; // Increase padding for a better look on larger screens
+//  }
+//
+//  .card-header-location span, .content-left span, .content-right span {
+//    // Increase the font size for better readability on larger screens
+//    font-size: calc(1rem + 1vw); // This makes the font size responsive to the viewport width
+//  }
+//
+//  // You can add additional styles here to adjust other elements as needed
+//}
 
 

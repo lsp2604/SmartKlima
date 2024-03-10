@@ -6,10 +6,13 @@ import { UrlaubsNachtmodusComponent } from './urlaubs-nachtmodus/urlaubs-nachtmo
 import { RuhemodusComponent } from './ruhemodus/ruhemodus.component';
 import { DownlinkComponent } from "../downlink/downlink.component";
 import {WeatherService} from "../Service/weather.service";
-import {DatePipe, NgIf, NgOptimizedImage} from "@angular/common";
+import {DatePipe} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
+import {DownlinkService} from "../Service/downlink.service";
 
 declare var $: any;
+
+
 
 const controls: NodeListOf<HTMLElement> = document.querySelectorAll('.controls__tab');
 
@@ -40,7 +43,7 @@ const controlList: Array<HTMLElement | null> = [light, shades, audio, coffee];
 export class DashboardComponent implements OnInit {
 
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(private weatherService: WeatherService, private downlinkService: DownlinkService){}
 
   public weather: any;
 
@@ -67,11 +70,19 @@ export class DashboardComponent implements OnInit {
       editableTooltip: false,
       startValue: 0,
       rangeColor: "#97E3FE",
-      change: function (args: { value: any; }) {
-        console.log(args.value);
+      change: (args: any) => {
+        this.changeTemp(args);
       }
     });
   }
+
+
+  changeTemp(args: { value: any; }) {
+    console.log(args.value);
+    // this.downlinkService.sendmsg(args.value.toString());
+  }
+
+
 
   loadWeather(lat: string, lon:string) {
     this.weatherService.getWeather(lat, lon).subscribe(

@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
       min: 16,
       max: 32,
       svgMode: true,
-      handleSize: "+8",
+      handleSize: "+20",
       pathColor: "#e3e4ed",
       borderWidth: 0,
       editableTooltip: false,

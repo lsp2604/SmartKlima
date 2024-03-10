@@ -9,16 +9,9 @@ import {WeatherService} from "../Service/weather.service";
 import {DatePipe, NgIf, NgOptimizedImage} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
 
+declare var $: any;
 
-
-const weatherOptions: NodeListOf<HTMLElement> = document.querySelectorAll('.weather-options__option');
 const controls: NodeListOf<HTMLElement> = document.querySelectorAll('.controls__tab');
-
-const power: HTMLElement | null = document.querySelector('.weather__power');
-const circleFill: HTMLElement | null = document.querySelector('.weather__circle-fill');
-const tempAmount: HTMLElement | null = document.querySelector('.weather__amount');
-const tempDegrees: HTMLElement | null = document.querySelector('.weather__degrees');
-const tempNull: HTMLElement | null = document.querySelector('.weather__null');
 
 const light: HTMLElement | null = document.getElementById('light');
 const shades: HTMLElement | null = document.getElementById('shades');
@@ -57,6 +50,27 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.loadWeather('50.9856', '7.13298');
+
+    $("#slider").roundSlider({
+      sliderType: "min-range",
+      circleShape: "pie",
+      startAngle: 315,
+      radius: 120,
+      lineCap: "round",
+      widows: 32,
+      min: 16,
+      max: 32,
+      svgMode: true,
+      handleSize: "+8",
+      pathColor: "#e3e4ed",
+      borderWidth: 0,
+      editableTooltip: false,
+      startValue: 0,
+      rangeColor: "#97E3FE",
+      change: function (args: { value: any; }) {
+        console.log(args.value);
+      }
+    });
   }
 
   loadWeather(lat: string, lon:string) {
@@ -93,26 +107,3 @@ controls.forEach(control => {
   })
 })
 
-weatherOptions.forEach(weatherOption => {
-  weatherOption.addEventListener('click', () => {
-    weatherOptions.forEach(option => {
-      option.classList.remove('weather-options__option--active');
-    })
-    weatherOption.classList.toggle('weather-options__option--active');
-  })
-})
-
-power?.addEventListener('click', () => {
-  circleFill?.classList.toggle('weather__circle-fill--on');
-  power.classList.toggle('weather__power--active');
-
-  if(tempNull?.textContent == '--') {
-    tempNull.textContent = '';
-    tempAmount ? tempAmount.textContent = '24\xB0' : null;
-    tempDegrees ? tempDegrees.textContent = 'Celsius' : null;
-  } else {
-    tempNull ? tempNull.textContent = '--' : null;
-    tempAmount ? tempAmount.textContent = '' : null;
-    tempDegrees ? tempDegrees.textContent = '' : null;
-  }
-})

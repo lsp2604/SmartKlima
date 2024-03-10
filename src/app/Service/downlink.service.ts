@@ -12,7 +12,7 @@ export class DownlinkService {
 
   constructor(private _mqttService: MqttService) { }
 
-  sendmsg(frm_payload:string): void {
+  sendmsg(frm_payload:number): void {
 
     this.msg ='{"downlinks":[{"f_port": 1, "frm_payload":"' + frm_payload + '"}]}';
     // use unsafe publish for non-ssl websockets

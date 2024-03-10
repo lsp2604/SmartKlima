@@ -6,49 +6,42 @@ import { UrlaubsNachtmodusComponent } from './urlaubs-nachtmodus/urlaubs-nachtmo
 import { RuhemodusComponent } from './ruhemodus/ruhemodus.component';
 import { DownlinkComponent } from "../downlink/downlink.component";
 import {WeatherService} from "../Service/weather.service";
-import {DatePipe} from "@angular/common";
+import {DatePipe, NgClass} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
 import {DownlinkService} from "../Service/downlink.service";
+import {MatIcon} from "@angular/material/icon";
 
 declare var $: any;
-
-
-
-const controls: NodeListOf<HTMLElement> = document.querySelectorAll('.controls__tab');
-
-const light: HTMLElement | null = document.getElementById('light');
-const shades: HTMLElement | null = document.getElementById('shades');
-const audio: HTMLElement | null = document.getElementById('audio');
-const coffee: HTMLElement | null = document.getElementById('coffee');
-const controlList: Array<HTMLElement | null> = [light, shades, audio, coffee];
-
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
-    imports: [
-        DatePipe,
-        MatGridList,
-        MatGridTile,
-        MatDivider,
-        TempOutComponent,
-        TempReglerComponent,
-        UrlaubsNachtmodusComponent,
-        RuhemodusComponent,
-        DownlinkComponent
-    ]
+  imports: [
+    DatePipe,
+    MatGridList,
+    MatGridTile,
+    MatDivider,
+    TempOutComponent,
+    TempReglerComponent,
+    UrlaubsNachtmodusComponent,
+    RuhemodusComponent,
+    DownlinkComponent,
+    MatIcon,
+    NgClass
+  ]
 })
 export class DashboardComponent implements OnInit {
-
 
   constructor(private weatherService: WeatherService, private downlinkService: DownlinkService){}
 
   public weather: any;
-
-
   myDate: Date = new Date();
+
+
+  toggle = true;
+  status = 'On';
 
 
   ngOnInit() {
@@ -79,17 +72,14 @@ export class DashboardComponent implements OnInit {
 
   changeTemp(args: { value: any; }) {
     console.log(args.value);
-    // this.downlinkService.sendmsg(args.value.toString());
+    // this.downlinkService.sendmsg(args.value);
   }
-
 
 
   loadWeather(lat: string, lon:string) {
     this.weatherService.getWeather(lat, lon).subscribe(
       data => {
         this.weather = data;
-        console.log(this.weather);
-
       },
       err => {
         console.error(err);
@@ -97,24 +87,10 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-}
 
-controls.forEach(control => {
-  control.addEventListener('click', (e) => {
-    control.classList.toggle('controls__tab--active');
 
-    let stateId: RegExpMatchArray | null = (e.currentTarget as HTMLElement).innerHTML.match('(?:id=\")[a-z]*(?:\")');
-    const id: string = stateId ? stateId[0].slice(4, -1) : '';
-
-    controlList.filter(elem => {
-      if(elem && elem.id == id) {
-        if(!control.classList.contains('controls__tab--active')) {
-          elem.textContent = 'OFF';
-        } else {
-          elem.textContent = 'ON';
-        }
-      }
-    })
-  })
-})
+  enableDisableRule() {
+    this.toggle = !this.toggle;
+    this.status = this.toggle ? 'On' : 'Off';
+  }}
 

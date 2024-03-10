@@ -212,34 +212,7 @@ body {
       .controlls__text {
         color: #030303;
       }
-      .fa-lightbulb {
-        background-color: rgba(101,141,252,1);
-        background: linear-gradient(to right, rgba(101,141,252,1) 0%, rgba(53,104,255,1) 100%);
-      }
-      .fa-border-all {
-        background: rgba(98,214,172,1);
-        background: linear-gradient(to right, rgba(98,214,172,1) 0%, rgba(3,215,144,1) 100%);
-
-      }
-      .fa-volume-up {
-        background: rgba(62,170,247,1);
-        background: linear-gradient(to right, rgba(62,170,247,1) 0%, rgba(10,152,255,1) 100%);
-
-      }
-      .fa-mug-hot {
-        background: rgba(252,199,93,1);
-        background: linear-gradient(to right, rgba(252,199,93,1) 0%, rgba(255,175,11,1) 100%);
-      }
     }
-  }
-  &__icon {
-    font-size: 2rem;
-    box-sizing: border-box;
-    width: 4rem;
-    height: 3.5rem;
-    padding: .8rem;
-    border-radius: 4px;
-    margin-right: 1rem;
   }
   &__text {
     display: flex;
@@ -254,6 +227,20 @@ body {
     margin: 0;
     font-size: .7rem;
   }
+}
+
+.green {
+  border-radius: 3px;
+  background: #62dfc0;
+  box-shadow:  5px 5px 10px #55c2a7,
+  -5px -5px 10px #6ffcd9;
+}
+
+.red {
+  border-radius: 3px;
+  background: #c5c4c4;
+  box-shadow:  5px 5px 10px #ababab,
+  -5px -5px 10px #dfdddd;
 }
 
 

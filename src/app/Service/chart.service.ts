@@ -58,4 +58,47 @@ export class ChartService {
       });
     });
   }
+
+  fetchWeatherData(start:string, end:string, custom:boolean): Observable<any> {
+    // Example: Aggregate windows every 1 hour
+    const windowPeriod = '60m';
+    if(custom){
+      this.query = `from(bucket: "${bucket}")
+        |> range(start: ${start}, stop: ${end})
+        |> filter(fn: (r) => r["_measurement"] == "weather")
+        |> filter(fn: (r) => r["_field"] == "temperature")
+        |> filter(fn: (r) => r["city"] == "Bergisch Gladbach")
+        |> aggregateWindow(every: 1d, fn: mean, createEmpty: false)
+        |> yield(name: "Measurements")`;
+    }
+    else{
+      this.query = `from(bucket: "${bucket}")
+        |> range(start: ${start}, stop: ${end})
+        |> filter(fn: (r) => r["_measurement"] == "weather")
+        |> filter(fn: (r) => r["_field"] == "temperature")
+        |> filter(fn: (r) => r["city"] == "Bergisch Gladbach")
+        |> aggregateWindow(every: ${windowPeriod}, fn: mean, createEmpty: false)
+        |> yield(name: "Measurements")`;
+    }
+
+
+    const influxDB = new InfluxDB({ url, token,});
+    const queryApi = influxDB.getQueryApi(org);
+
+
+    return new Observable(observer => {
+      queryApi.queryRows(this.query, {
+        next(row, tableMeta) {
+          const o = tableMeta.toObject(row);
+          observer.next(o);
+        },
+        error(error) {
+          observer.error(error);
+        },
+        complete() {
+          observer.complete();
+        },
+      });
+    });
+  }
 }

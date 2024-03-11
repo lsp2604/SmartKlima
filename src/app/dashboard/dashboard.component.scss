@@ -442,8 +442,12 @@ body {
     background-color: #3164ff;
   }
   .Temp-Control{
-    width: calc(50% - 24px);
+    //width: calc(50% - 24px);
     margin-bottom: 2%;
+    min-width: 350px;
+  width: 45%;
+  min-height: 380px;
+  height: 45%;
   }
 }
 

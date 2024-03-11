@@ -1,50 +1,370 @@
-.tempin{
-  position: relative;
-  height: 200px;
-  width: 200px;
-}
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap&subset=latin-ext');
 
-.tempout{
-  position: relative;
-  height: 200px;
-  width: 200p;
-}
+$blue: #3166ff;
+$grey: #8f9bb3;
+$grey-light: #edf1f7;
 
-.tempregler{
-  position: absolute;
-  top: 50px;
-  left: 420px;
-  height: 200px;
-  width: 200px;
+@mixin hover-icon {
+  color: $blue;
+  cursor: pointer;
+  transition: color .2s ease-in-out;
 }
-
-.urlaubsnachtmodus{
-  position: absolute;
-  top: 50px;
-  left: 640px;
-  height: 200px;
-  width: 200px;
-}
-
-.ruhemodus{
-  position: absolute;
-  top: 270px;
-  left: 420px;
-  height: 200px;
-  width: 200px;
-}
-
-body,html{
-  background: #4a9898;
+@keyframes circle-fill {
+  from {
+    stroke-dasharray: 0 100;
+  }
+  to {
+    stroke-dasharray: 45 72;
+  }
 }
 
 body {
-  background-color: #323232;
+  padding-top: 8vh;
+  font-family: Open Sans, serif;
+  height: 100vh;
+  color: #030303;
+  background: $grey-light;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: max-content auto;
+  overflow-y: scroll ;
 }
 
-.backcard{
-  background-color: #323131;
-  width: 900px;
-  height: 430px;
-  border-radius: 14px;
+.fas, .fab, .far {
+  color: $grey;
+  font-size: 18px;
 }
+
+
+.main-section {
+  display: flex;
+}
+
+/* Main content */
+
+.main {
+  flex: 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: $grey-light;
+  &__panel {
+    padding: 12px;
+  }
+}
+
+.weather {
+  float: left;
+  min-width: 250px;
+  width: 45%;
+  min-height: 450px;
+  height: 74%;
+  background: #fff;
+  border-radius: 2px;
+  padding: 12px;
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 4px 16px -8px rgba(0,0,0,0.3);
+  &__nav {
+    padding-bottom: 12px;
+    display: flex;
+    justify-content: space-around;
+    font-size: .8rem;
+    font-weight: 700;
+    color: $grey;
+    cursor: pointer;
+    &--active {
+      color: #3166ff;
+      position: relative;
+      &::after {
+        content: '';
+        position: absolute;
+        background: #3166ff;
+        width: 125%;
+        height: 3px;
+        bottom: -12px;
+        left: -12.5%;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+.card-header-location span:first-child {      //BERGISCH GLADBACH
+  font-weight: 700;
+  font-size: 36px;
+  font-family: "Roboto", sans-serif;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  margin-top: 5%;
+  letter-spacing: -0.17vw;
+}
+
+.card-header-location span:last-child {       //DATUM
+  font-weight: 600;
+  font-size: 29px;
+  line-height: 80%;
+  color: rgba(0, 0, 0, 0.598);
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  margin-top: 1%;
+  letter-spacing: -0.1vw;
+}
+
+.card-header-location {                     // Card Head Formatierung
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.weather-content {
+  width: 100%;
+  height: 100%;
+}
+
+.weather-content-temp {
+  display: grid !important;
+  grid-template-columns: 1fr 0 1fr;
+  margin-top: 10%;
+  justify-items: center;
+  align-items: center; // Einkommentieren für center center ---> jetzt gerade center top
+  height: 80%;
+  grid-template-areas: "left divider right"
+}
+
+.vertical-divider {
+  grid-area: divider;
+  height: 100%;
+  width: 3px;
+  background-color: #3164ff7d;
+}
+
+.mat-divider.mat-divider-vertical {
+  border-color: blue;
+}
+
+.content-left {
+  grid-area: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 13px;
+  margin-top: -75px;
+}
+
+.content-left span {
+  font-weight: 450;
+  font-size: 45px;
+  margin-top: -11px;
+}
+
+.content-right {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 13px;
+  margin-top: -75px;
+}
+
+.content-right span {
+  font-weight: 450;
+  font-size: 45px;
+  margin-top: -11px;
+}
+
+.weather-icon {                          // Wetter Symbol
+  width: 40%;
+  height: auto;
+}
+
+.controlls {
+  width: 45%;
+  float:right;
+  margin: 10px;
+  margin-top: 0;
+  padding: 12px;
+  display: grid;
+  flex-wrap: wrap;
+  grid-template-columns: 50% 50%;
+  column-gap: 24px;
+  row-gap: 24px;
+  &__tab {
+    cursor: pointer;
+    padding: 8px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 1px 4px 16px -8px rgba(0,0,0,0.3);
+    &--active {
+      i {
+        color: #fff;
+      }
+      .controlls__text {
+        color: #030303;
+      }
+    }
+  }
+  &__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: $grey;
+  }
+  &__header {
+    margin: 0 0 4px;
+  }
+  &__state {
+    margin: 0;
+    font-size: .7rem;
+  }
+}
+
+.green {
+  border-radius: 3px;
+  background: #62dfc0;
+  box-shadow:  5px 5px 10px #55c2a7,
+  -5px -5px 10px #6ffcd9;
+}
+
+.red {
+  border-radius: 3px;
+  background: #c5c4c4;
+  box-shadow:  5px 5px 10px #ababab,
+  -5px -5px 10px #dfdddd;
+}
+
+
+.Temp-Control {
+  float: right;
+  min-width: 350px;
+  width: 45%;
+  min-height: 250px;
+  height: 30%;
+  background: #fff;
+  padding: 12px;
+  box-shadow: 1px 4px 16px -8px rgba(0,0,0,0.3);
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Media */
+
+@media (max-width: 576px){
+  html{
+    width:100%;
+    max-width: 1120px;
+    overflow: auto;
+    overflow-x: hidden;
+  }
+  .main__panel {
+    padding: 0 12px;
+  }
+  .controlls {
+    padding: 12px 0;
+    grid-template-columns: 100%;
+    row-gap: 12px;
+    width: 100%;
+  }
+  .weather {
+    width: calc(100% - 24px);
+    margin-bottom: 10%;
+  }
+  .main-section {
+    flex-direction: column;
+  }
+  .fa-chevron-left {
+    transform: rotate(-90deg);
+  }
+  .card-header-location span:first-child{
+    font-size: 1.5rem;
+    line-height: 135%;
+    letter-spacing: -0.1vw;
+  }
+  .card-header-location span:last-child{
+    font-size: 1.2rem;
+    line-height: 80%;
+    letter-spacing: -0.1vw;
+  }
+  .card-header-location{
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .vertical-divider{
+    grid-area: divider;
+    height: 100%;
+    width: 3px;
+    background-color: #3164ff7d;
+  }
+
+  .Temp-Control{
+    width: calc(100% - 24px);
+    margin-bottom: 10%;
+  }
+
+}
+
+
+@media (max-width: 1000px){
+  .main__panel {
+    padding: 0 12px;
+  }
+  .controlls {
+    padding: 12px 0;
+    grid-template-columns: 100%;
+    row-gap: 12px;
+    width: 100%;
+  }
+  .weather {
+    width: calc(100% - 24px);
+    margin: 0;
+    margin-bottom: 10%;
+  }
+  .main-section {
+    flex-direction: column;
+  }
+  .fa-chevron-left {
+    transform: rotate(-90deg);
+  }
+
+  .Temp-Control{
+    width: calc(100% - 24px);
+    margin: 0;
+    margin-bottom: 10%;
+  }
+}
+
+//@media (min-width: 1440px) {
+//  .weather, .Temp-Control, .controlls__tab {
+//    min-width: 150px; // Adjust this to your preferred size
+//    width: 60%; // You can adjust this percentage based on how much of the screen width you want the card to occupy
+//    min-height: 500px; // Make cards taller
+//    margin: 20px auto; // Center cards with automatic horizontal margins
+//    padding: 30px; // Increase padding for a better look on larger screens
+//  }
+//
+//  .card-header-location span, .content-left span, .content-right span {
+//    // Increase the font size for better readability on larger screens
+//    font-size: calc(1rem + 1vw); // This makes the font size responsive to the viewport width
+//  }
+//
+//  // You can add additional styles here to adjust other elements as needed
+//}
+
+

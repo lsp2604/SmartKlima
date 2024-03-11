@@ -55,10 +55,38 @@ export class HistoryComponent implements OnInit {
   public chart: any = [];
   constructor(@Optional() private chartservice: ChartService, public dialog:MatDialog) {}
   ngOnInit() {
-
     // Initialisieren Sie das Chart-Objekt
-    this.createChart;
- 
+    /*this.chart = new Chart('canvas', {
+      type: 'line',
+      data: {
+        labels: [], // Initial leere Labels
+        datasets: [],// Initial leere Datensätze
+      },
+      options: {
+        plugins: {
+        },
+        backgroundColor: 'purple',
+        scales: {
+          x: {
+            grid:{
+              color: 'rgba(154, 154, 154, 10)'
+            }, 
+            ticks:{
+              color: 'rgba(154, 154, 154, 10)'
+            }
+          },
+          y: {
+            grid:{
+              color: 'rgba(154, 154, 154, 10)'
+            },
+            ticks:{
+              color: 'rgba(154, 154, 154, 10)'
+            }
+          }
+      }
+      }
+    });*/
+    this.createChart(this.chartservice)
     // Laden der Daten für die Sensoren
     const start = "-24h"
     const end = "now()"
@@ -67,7 +95,8 @@ export class HistoryComponent implements OnInit {
     this.loadWeatherDataForSensors(start, end, custom);
   }
 
-  createChart () {
+  createChart(chartservice: ChartService)
+  {
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {
@@ -138,14 +167,10 @@ export class HistoryComponent implements OnInit {
       if(this.minScaleValue == null || this.minScaleValue! > minDataValue )
       {
         this.minScaleValue = minDataValue;
-        console.log("loaded min data");
-        console.log(this.minScaleValue);
       }
       if(this.maxScaleValue == null || this.maxScaleValue! < maxDataValue)
       {
         this.maxScaleValue = maxDataValue;
-        console.log("loaded max data");
-        console.log(this.maxScaleValue);
       }
       this.chart.options.scales.y.min = Math.floor(this.minScaleValue!) - 1;
       this.chart.options.scales.y.max = Math.ceil(this.maxScaleValue!) + 1;
@@ -163,11 +188,12 @@ export class HistoryComponent implements OnInit {
       {
           this.chart.data.labels = dataArray.map((d: any) => this.formatTimeToDate(d._time));
       }
-      else{
+      else
+      {
         this.chart.data.labels = dataArray.map((d: any) => this.formatTime(d._time));
       }
 
-      const dataWeather = {
+      const weatherDataset = {
         label: 'Outdoor Temperature',
         data: dataArray.map((d: any) => d._value),
         borderColor: 'rgb(187, 134, 252)',
@@ -176,8 +202,7 @@ export class HistoryComponent implements OnInit {
 
       console.log("Weather data")
       console.log(this.dataWeather)
-      this.chart.data.datasets.push(dataWeather);
-
+      this.chart.data.datasets.push(weatherDataset);
 
       let minWeatherDataValue = Number.POSITIVE_INFINITY;
       let maxWeatherDataValue = Number.NEGATIVE_INFINITY;
@@ -193,14 +218,10 @@ export class HistoryComponent implements OnInit {
       if(this.minScaleValue == null || this.minScaleValue! > minWeatherDataValue )
       {
         this.minScaleValue = minWeatherDataValue;
-        console.log("loaded weather min data");
-        console.log(this.minScaleValue);
       }
       if(this.maxScaleValue == null || this.maxScaleValue! < maxWeatherDataValue)
       {
         this.maxScaleValue = maxWeatherDataValue;
-        console.log("loaded weather max data");
-        console.log(this.maxScaleValue);
       }
       this.chart.options.scales.y.min = Math.floor(this.minScaleValue!) - 1;
       this.chart.options.scales.y.max = Math.ceil(this.maxScaleValue!) + 1;
@@ -225,7 +246,8 @@ export class HistoryComponent implements OnInit {
 
 
   onSelectionChange(value:string) {
-    this.chart.destroy();
+    this.chart.destroy('canvas');
+    this.createChart(this.chartservice);
     if (value === 'custom') {
       this.openDatePicker();
     }
@@ -255,7 +277,5 @@ export class HistoryComponent implements OnInit {
       this.loadDataForSensors(result.start, result.end, custom);
       this.loadWeatherDataForSensors(result.start, result.end, custom);
     });
-
   }
-
 }

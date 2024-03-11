@@ -315,10 +315,12 @@ body {
   }
 
   .Temp-Control{
-    width: calc(100% - 24px);
+    min-width: 350px;
+    width: 42%;
+    min-height: 280px;
+    height: 35%;
     margin-bottom: 10%;
   }
-
 }
 
 

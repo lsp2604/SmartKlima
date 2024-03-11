@@ -248,11 +248,12 @@ body {
   float: right;
   min-width: 350px;
   width: 45%;
-  min-height: 250px;
-  height: 30%;
+  min-height: 280px;
+  height: 35%;
   background: #fff;
   padding: 12px;
   box-shadow: 1px 4px 16px -8px rgba(0,0,0,0.3);
+  margin-top: 21.5px;
 }
 
 .slider-container {
@@ -367,4 +368,47 @@ body {
 //  // You can add additional styles here to adjust other elements as needed
 //}
 
-
+@media (min-width: 1920px){
+  html{
+    width: 100%;
+    max-width: 1920px;
+    overflow: auto;
+    overflow-x: hidden;
+  }
+  .main__panel {
+    padding: 0 24px;
+  }
+  .controlls {
+    padding: 24px 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    width: 100%;
+  }
+  .weather {
+    width: calc(50% - 24px);
+    margin-bottom: 2%;
+  }
+  .main-section {
+    flex-direction: row;
+  }
+  .fa-chevron-left {
+    transform: rotate(0deg);
+  }
+  .card-header-location span:first-child{
+    font-size: 2rem;
+  }
+  .card-header-location span:last-child{
+    font-size: 1.5rem;
+  }
+  .card-header-location{
+    gap: 10px;
+  }
+  .vertical-divider{
+    width: 5px;
+    background-color: #3164ff;
+  }
+  .Temp-Control{
+    width: calc(50% - 24px);
+    margin-bottom: 2%;
+  }
+}

@@ -17,7 +17,6 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import { forkJoin } from 'rxjs';
 import { withInterceptors } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-history',
   standalone: true,
@@ -55,37 +54,6 @@ export class HistoryComponent implements OnInit {
   public chart: any = [];
   constructor(@Optional() private chartservice: ChartService, public dialog:MatDialog) {}
   ngOnInit() {
-    // Initialisieren Sie das Chart-Objekt
-    /*this.chart = new Chart('canvas', {
-      type: 'line',
-      data: {
-        labels: [], // Initial leere Labels
-        datasets: [],// Initial leere Datensätze
-      },
-      options: {
-        plugins: {
-        },
-        backgroundColor: 'purple',
-        scales: {
-          x: {
-            grid:{
-              color: 'rgba(154, 154, 154, 10)'
-            }, 
-            ticks:{
-              color: 'rgba(154, 154, 154, 10)'
-            }
-          },
-          y: {
-            grid:{
-              color: 'rgba(154, 154, 154, 10)'
-            },
-            ticks:{
-              color: 'rgba(154, 154, 154, 10)'
-            }
-          }
-      }
-      }
-    });*/
     this.createChart(this.chartservice)
     // Laden der Daten für die Sensoren
     const start = "-24h"
@@ -106,7 +74,6 @@ export class HistoryComponent implements OnInit {
       options: {
         plugins: {
         },
-        backgroundColor: 'purple',
         scales: {
           x: {
             grid:{
@@ -135,6 +102,9 @@ export class HistoryComponent implements OnInit {
     ).subscribe((dataArray: any[]) => {
       // Now 'dataArray' is guaranteed to be an array
       // this.chart.data.labels = dataArray.map((d: any) => this.formatTime(d._time));
+
+      dataArray = this.removeDuplicatesFromArray(dataArray);
+
       if(custom)
       {
           this.chart.data.labels = dataArray.map((d: any) => this.formatTimeToDate(d._time));
@@ -144,9 +114,10 @@ export class HistoryComponent implements OnInit {
       }
       
       const sensorDataset = {
-        label: 'Temperatur',
+        label: 'Indoor Temperature',
         data: dataArray.map((d: any) => d._value),
-        borderColor: 'rgb(187, 134, 252)',
+        borderColor: 'rgb(255, 0, 0)',
+        backgroundColor: 'rgb(255, 0, 0)',
         fill: false,
       };
       
@@ -184,6 +155,9 @@ export class HistoryComponent implements OnInit {
     ).subscribe((dataArray: any[]) => {
       // Now 'dataArray' is guaranteed to be an array
       // this.chart.data.labels = dataArray.map((d: any) => this.formatTime(d._time));
+
+      dataArray = this.removeDuplicatesFromArray(dataArray);
+
       if(custom)
       {
           this.chart.data.labels = dataArray.map((d: any) => this.formatTimeToDate(d._time));
@@ -196,12 +170,11 @@ export class HistoryComponent implements OnInit {
       const weatherDataset = {
         label: 'Outdoor Temperature',
         data: dataArray.map((d: any) => d._value),
-        borderColor: 'rgb(187, 134, 252)',
+        borderColor: 'rgb(0, 102, 255)',
+        backgroundColor: 'rgb(0, 102, 255)',
         fill: false,
       };
 
-      console.log("Weather data")
-      console.log(this.dataWeather)
       this.chart.data.datasets.push(weatherDataset);
 
       let minWeatherDataValue = Number.POSITIVE_INFINITY;
@@ -228,7 +201,30 @@ export class HistoryComponent implements OnInit {
       this.chart.update();
     });
   }
+
+  removeDuplicatesFromArray(dataArray: any[]) {
+    let arrayCleaned: any[] = [];
+    let seen: { [key: string]: boolean } = {}; // Objekt zum Verfolgen bereits gesehener Zeitpunkte
+    
+    for (let item of dataArray) {
+        let timestamp = item._time; // Annahme: timestamp ist das Feld, das den Zeitpunkt enthält
+
+        // Wenn der Zeitpunkt noch nicht gesehen wurde, füge ihn zum bereinigten Array hinzu und markiere ihn als gesehen
+        if (!seen.hasOwnProperty(timestamp)) {
+            arrayCleaned.push(item);
+            seen[timestamp] = true;
+        }
+    }
+
+    arrayCleaned.sort((a, b) => {
+      return new Date(a._time).getTime() - new Date(b._time).getTime();
+    });
+    return arrayCleaned;
+  }
+
   
+
+
   formatTime(dateInput: string): string {
     const date = new Date(dateInput);
     const hours = date.getHours().toString().padStart(2, '0');
@@ -279,3 +275,4 @@ export class HistoryComponent implements OnInit {
     });
   }
 }
+

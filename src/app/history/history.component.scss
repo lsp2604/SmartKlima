@@ -1,15 +1,19 @@
 
+$blue: #3166ff;
+$grey: #8f9bb3;
+$grey-light: #edf1f7;
+
 .chart {
   position: absolute;
   top: 10%;
   left: 0;
   width: 85%;
   height: 85%;
-  color: #36393e;
+  color: $grey-light;
 }
 
 .mat-toolbar {
-  background-color: #838383;
+  background-color: #fff;
   height: 60px;
 }
 
@@ -21,27 +25,48 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #36393e;
+  background-color: #fff;
 }
 
 .container-range {
-  background-color: #36393e; /* Grauer Hintergrund */
-  padding: 100px; /* Fügen Sie etwas Abstand um den Container hinzu */
-
+  background-color: $grey-light; /* Grauer Hintergrund */
+  padding-top: 5%; /* Fügen Sie etwas Abstand um den Container hinzu */
+  padding-left: 2%;
+  max-height: 5%;
+  line-height: 5%;
 }
 
 .mat-form-field {
-  color: transparent !important; /* Ändern Sie die Schriftfarbe in Weiß */
+  color: #fff; /* Ändern Sie die Schriftfarbe in Weiß */
+  background-color: #fff;
+  color-scheme: #fff;
   width: 100%; /* Füllen Sie den verfügbaren Platz aus */
+  height: 5%;
+}
+
+.container-range mat-form-field .mat-form-field-flex {
+  background-color: white !important; /* Hintergrundfarbe des Dropdown-Menüs */
+}
+
+.container-range mat-form-field .mat-form-field-underline {
+  background-color: white !important; /* Hintergrundfarbe des Unterstrichs */
+}
+
+.container-range mat-form-field .mat-form-field-wrapper {
+  color: black; /* Textfarbe */
 }
 
 .container-chart{
-  background-color: #36393e;
+  background-color: $grey-light;
   display: flex;
   justify-content: center;
+  padding-top: 0%;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-bottom: 2%;
 
   canvas {
-    background-color: #36393e;
-    padding: 100px;
+    background-color: #fff;
+    padding: 2%;
   }
 }

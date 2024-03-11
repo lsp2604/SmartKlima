@@ -1,10 +1,18 @@
 <mat-sidenav-container class="app-container" autosize [hasBackdrop]="true" >
 
   <mat-toolbar class="app-toolbar">
-    <button mat-raised-button color="warn" class="menu-button" aria-label="Menü öffnen" (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
+    <button class="btn" (click)="drawer.open()">
+      <span class="icon">
+          <svg viewBox="0 0 175 80" width="40" height="40">
+              <rect width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+              <rect y="30" width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+              <rect y="60" width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+          </svg>
+      </span>
+        <span class="text">Menu</span>
     </button>
-    <span>SmartKlima</span>
+    <span class="title">SmartKlima</span>
+
   </mat-toolbar>
   <mat-sidenav #drawer class="app-sidenav" mode="side" >
     <mat-nav-list>

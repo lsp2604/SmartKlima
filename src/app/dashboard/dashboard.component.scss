@@ -396,7 +396,7 @@ body {
 }
 
 
-@media (min-width: 1820px){
+@media (min-width: 1440px){
   html{
     width: 100%;
     max-width: 4000px;
@@ -413,8 +413,12 @@ body {
     width: 100%;
   }
   .weather {
-    width: calc(50% - 24px);
+    // width: calc(50% - 24px);
     margin-bottom: 2%;
+    min-width: 250px;
+    width: 42%;
+    min-height: 450px;
+    height: 74%;
   }
   .main-section {
     flex-direction: row;

@@ -1,7 +1,7 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import Chart from 'chart.js/auto';
 import {ChartService} from "../Service/chart.service";
-import {min, toArray} from "rxjs";
+import {toArray} from "rxjs";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
@@ -14,8 +14,6 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatIconButton} from "@angular/material/button";
 import {DatePickerComponent} from "./date-picker/date-picker.component";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import { forkJoin } from 'rxjs';
-import { withInterceptors } from '@angular/common/http';
 
 @Component({
   selector: 'app-history',
@@ -49,12 +47,12 @@ export class HistoryComponent implements OnInit {
   minScaleValue : number | undefined;
   maxScaleValue : number | undefined;
 
-  dataWeather: any;
+  selected = '-24h';
 
   public chart: any = [];
   constructor(@Optional() private chartservice: ChartService, public dialog:MatDialog) {}
   ngOnInit() {
-    this.createChart(this.chartservice)
+    this.createChart()
     // Laden der Daten für die Sensoren
     const start = "-24h"
     const end = "now()"
@@ -63,7 +61,7 @@ export class HistoryComponent implements OnInit {
     this.loadWeatherDataForSensors(start, end, custom);
   }
 
-  createChart(chartservice: ChartService)
+  createChart()
   {
     this.chart = new Chart('canvas', {
       type: 'line',
@@ -78,7 +76,7 @@ export class HistoryComponent implements OnInit {
           x: {
             grid:{
               color: 'rgba(154, 154, 154, 10)'
-            }, 
+            },
             ticks:{
               color: 'rgba(154, 154, 154, 10)'
             }
@@ -112,7 +110,7 @@ export class HistoryComponent implements OnInit {
       else{
         this.chart.data.labels = dataArray.map((d: any) => this.formatTime(d._time));
       }
-      
+
       const sensorDataset = {
         label: 'Indoor Temperature',
         data: dataArray.map((d: any) => d._value),
@@ -120,7 +118,7 @@ export class HistoryComponent implements OnInit {
         backgroundColor: 'rgb(255, 0, 0)',
         fill: false,
       };
-      
+
       this.chart.data.datasets.push(sensorDataset);
 
       let minDataValue = Number.POSITIVE_INFINITY;
@@ -205,7 +203,7 @@ export class HistoryComponent implements OnInit {
   removeDuplicatesFromArray(dataArray: any[]) {
     let arrayCleaned: any[] = [];
     let seen: { [key: string]: boolean } = {}; // Objekt zum Verfolgen bereits gesehener Zeitpunkte
-    
+
     for (let item of dataArray) {
         let timestamp = item._time; // Annahme: timestamp ist das Feld, das den Zeitpunkt enthält
 
@@ -222,7 +220,7 @@ export class HistoryComponent implements OnInit {
     return arrayCleaned;
   }
 
-  
+
 
 
   formatTime(dateInput: string): string {
@@ -243,7 +241,7 @@ export class HistoryComponent implements OnInit {
 
   onSelectionChange(value:string) {
     this.chart.destroy('canvas');
-    this.createChart(this.chartservice);
+    this.createChart();
     if (value === 'custom') {
       this.openDatePicker();
     }

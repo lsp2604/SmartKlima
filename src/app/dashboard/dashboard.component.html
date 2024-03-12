@@ -1,5 +1,115 @@
-<ng-container class="grid">
-  <app-temperature-slider></app-temperature-slider>
-</ng-container>
+<!--  <ng-container class="dashboard-container">-->
+
+<!--    <app-temp-out class="tempout"></app-temp-out>-->
+<!--    <app-temp-regler class="tempregler"></app-temp-regler>-->
+<!--    &lt;!&ndash; <app-urlaubs-nachtmodus class="urlaubsnachtmodus"></app-urlaubs-nachtmodus> &ndash;&gt;-->
+<!--    &lt;!&ndash; <app-ruhemodus class = "ruhemodus"></app-ruhemodus> &ndash;&gt;-->
+
+<!--  </ng-container>-->
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://kit.fontawesome.com/9ff39978d5.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+<section class="main-section">
+  <main class="main">
+    <div class="main__panel">
+      <section class="controlls">
+
+        <!--      CONTROLLERS      -->
+        <button class="controlls__tab">
+          <mat-icon>menu</mat-icon>
+          <div class="controlls__text">
+            <h3 class="controlls__header">Light</h3>
+            <p class="controlls__state" id="light">OFF</p>
+          </div>
+        </button>
+
+        <button class="controlls__tab">
+          <mat-icon>menu</mat-icon>
+          <div class="controlls__text">
+            <h3 class="controlls__header">Roller Shades</h3>
+            <p class="controlls__state" id="shades">OFF</p>
+          </div>
+        </button>
+
+        <button class="controlls__tab"
+                (click)="enableDisableRule()"
+                [ngClass]="{'green' : toggle, 'red': !toggle}">
+          <mat-icon>menu</mat-icon>
+          <div class="controlls__text">
+            <h3 class="controlls__header">Heizung</h3>
+            <p class="controlls__state" id="audio">{{status}}
+            </p>
+          </div>
+        </button>
+
+        <button class="controlls__tab">
+
+          <mat-icon>menu</mat-icon>
+          <div class="controlls__text">
+            <h3 class="controlls__header">Coffee Maker</h3>
+            <p class="controlls__state" id="coffee">OFF</p>
+          </div>
+        </button>
+      </section>
+
+
+      <!--     WEATHER PANEL     -->
+      <section class="weather">
+
+        <nav class="weather__nav">
+          <span class="weather__nav--active">TEMPERATURE</span>
+        </nav>
+
+        <div class="card-header-location">
+          <span>{{weather?.name}}</span>
+          <span>{{myDate | date: 'longDate' }}</span>
+        </div>
+
+
+        <section class="weather-content">
+          <div class="weather-content-temp">
+            <div class="content-left">
+              TEMPERATUR AUßEN <br>
+              <span>{{weather?.main.temp}}°C</span>
+              <span>
+                <img class="weather-icon" [src]="'http://openweathermap.org/img/wn/' + weather?.weather[0].icon + '@4x.png'" alt="weather icon">
+              </span>
+            </div>
+            <div class="vertical-divider"></div>
+            <div class="content-right">
+              TEMPERATUR INNEN <br>
+              <span>{{weather?.main.temp}}°C</span>
+            </div>
+          </div>
+        </section>
+      </section>
+
+
+      <!--     TEMPERATURE CONTROL PANEL     -->
+      <section class="Temp-Control">
+        <div class="slider-container">
+          <div id="slider"></div>
+        </div>
+      </section>
+    </div>
+
+
+
+
+
+  </main>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="top">
+        <p *ngIf="weather" class="weather-container">
+            <span class="weather-detail temperature">Temperatur: {{ weather.main.temp }}°C</span> <br>
+            <span class="weather-detail condition">Zustand: {{ weather.weather[0].description }}</span> <br>
+            <span>
+                <img [src]="'http://openweathermap.org/img/w/' + weather.weather[0].icon + '.png'" alt="weather icon">
+            </span>
+
+        </p>
+    </div>
+    <p class="desc">
+        <span class="title">Name:</span> {{ weather.name }}<br>
+    </p>
+</div>

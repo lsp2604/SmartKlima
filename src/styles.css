@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#slider .rs-tooltip-text {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 150px !important;
+  width: 150px !important;
+  font-size: 52px !important;
+  border-radius: 50% !important;
+  background-image: linear-gradient(135deg, #97e3fe, #5eb3de) !important;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.2), -4px -4px 4px #ffffff !important;
+}
+
+#slider .rs-tooltip-text:after {
+  content: '°' !important;
+  position: relative !important;
+  font-size: 32px !important;
+  top: -14px !important;
+  margin-right: -8px !important;
+}
+
+
+#slider .rs-handle {
+  background-color: #5eb3de !important;
+  border: 12px solid #ffffff !important;
+  box-shadow: 0 0 30px rgba(0,0,0,0.1) !important;
+}
+
+#slider rs.bar {
+  justify-content: center !important;
+  align-items: center !important;
+}

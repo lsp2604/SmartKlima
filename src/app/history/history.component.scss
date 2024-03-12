@@ -1,0 +1,56 @@
+
+$blue: #3166ff;
+$grey: #8f9bb3;
+$grey-light: #edf1f7;
+
+.chart {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  width: 85%;
+  height: 85%;
+  color: $grey-light;
+}
+
+
+.range-selector {
+  background: red;
+}
+
+
+.container-range {
+  padding-top: 5%; /* Fügen Sie etwas Abstand um den Container hinzu */
+  padding-left: 2%;
+  max-height: 5%;
+  line-height: 5%;
+}
+
+.mat-form-field {
+  color: #fff; /* Ändern Sie die Schriftfarbe in Weiß */
+  background-color: #fff;
+  width: 100%; /* Füllen Sie den verfügbaren Platz aus */
+  height: 5%;
+}
+
+.container-range mat-form-field .mat-form-field-flex {
+  background-color: white !important; /* Hintergrundfarbe des Dropdown-Menüs */
+}
+
+.container-range mat-form-field .mat-form-field-underline {
+  background-color: white !important; /* Hintergrundfarbe des Unterstrichs */
+}
+
+.container-range mat-form-field .mat-form-field-wrapper {
+  color: black; /* Textfarbe */
+}
+
+.container-chart{
+  display: flex;
+  justify-content: center;
+  padding: 0 2% 2%;
+
+  canvas {
+    background-color: #fff;
+    padding: 2%;
+  }
+}

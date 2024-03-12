@@ -1,0 +1,9 @@
+<div class="feature-card3-feature-card" [ngClass]="rootClassName">
+<!--  <svg viewBox="0 0 1024 1024" class="feature-card3-icon">-->
+<!--    <path d="{{ icon }}"></path>-->
+<!--  </svg>-->
+  <mat-icon class="feature-card3-icon">{{ icon }}</mat-icon>
+  <h2 class="feature-card3-text">{{ title }}</h2>
+  <span class="feature-card3-text1">{{ description }}</span>
+  <mat-button-toggle class="feature-card3-button" routerLink="{{ redirectUrl }}">{{ action }}</mat-button-toggle>
+</div>

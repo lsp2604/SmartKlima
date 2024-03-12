@@ -20,7 +20,6 @@ import {MatListItem, MatNavList} from "@angular/material/list";
 })
 export class AppComponent {
   title = 'SmartKlima';
-  showFiller = false;
 
   constructor(public router:Router ) {}
 

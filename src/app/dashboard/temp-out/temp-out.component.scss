@@ -1,0 +1,118 @@
+.card {
+  width: 33vw;
+  height: 88.7vh;
+  top: 1.8%;
+  left: 0.78%;
+  position: relative;
+  background: #bb86fc2c;
+  box-shadow: 0 0 0 4px #bb86fc;
+  border-radius:5px 5px;
+  transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
+  cursor: pointer;
+}
+
+.container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
+  height: 10vh;
+  margin-left: 47%;
+  margin-top: 72%;
+  transform: scale(0.7);
+}
+
+.card-header-location span:first-child {      //BERGISCH GLADBACH
+  font-weight: 800;
+  font-size: 2.79vw;
+  line-height: 135%;
+  font-family: "Roboto", sans-serif;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  margin-top: 5%;
+  letter-spacing: -0.17vw;
+}
+
+.card-header-location span:last-child {       //DATUM
+  font-weight: 700;
+  font-size: 2.49vw;
+  line-height: 80%;
+  color: rgba(255, 255, 255, 0.598);
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  margin-top: 1%;
+  letter-spacing: -0.1vw;
+}
+
+.card-header-location {                     // Card Head Formatierung
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+// .calender-icon {                            // Kalender Symbol
+//   color: rgba(255, 255, 255, 0.598);
+//   left: 20.4%;
+//   top: 14.1%;
+//   position: absolute;
+// }
+
+.mat-divider {                             // Trennlinie
+  background-color: #ffffff;
+  margin-top: 7%;
+  border-top-width: 0.1vw;
+}
+
+.card-header span:last-child {         // Temperatur im FHDW Kino TEXT
+  font-weight: 700;
+  font-size: 1.99vw;
+  line-height: 135%;
+  margin-left: 2%;
+  margin-top: 1.5%;
+  color: rgba(255, 255, 255, 0.977);
+}
+
+.tempIn {                             // Temperatur im FHDW Kino GRADZAHL
+  position: absolute;
+  left: 1.4vh;
+  margin-top: -40%;
+  font-weight: 700;
+  font-size: 4.5vw;
+  line-height: 120%;
+  color: rgb(255, 255, 255);
+}
+
+.card-header-zwei span:last-child {       // Temperatur TEXT
+  font-weight: 700;
+  font-size: 1.99vw;
+  line-height: 135%;
+  margin-left: 2%;
+  margin-top: 1.5%;
+  color: rgba(255, 255, 255, 0.977);
+}
+
+.card-header-zwei {                       // Positionierung
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 30%;
+}
+
+.temp {                                    // Temperatur ZAHL
+  position: absolute;
+  left: 1.4vh;
+  margin-top: -2%;
+  font-weight: 700;
+  font-size: 4.5vw;
+  line-height: 120%;
+  color: rgb(255, 255, 255);
+}
+
+.weather-icon {                          // Wetter Symbol
+  position: absolute;
+  left: 1%;
+  margin-top: -73%;
+  width: 187%;
+  height: auto;
+}

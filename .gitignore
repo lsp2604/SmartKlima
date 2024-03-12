@@ -44,3 +44,8 @@ testem.log
 Thumbs.db
 /token
 /src/app/x.html
+
+
+/src/app/environments/environment.prod.ts
+src/app/environments/eniroment.prod.ts
+src/app/environments/enviroment.prod.ts

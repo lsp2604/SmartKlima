@@ -1,34 +1,104 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { InfluxDB } from '@influxdata/influxdb-client';
 import { Observable } from 'rxjs';
+import  { environment} from "../environments/environment";
 
-const influxQuery = `SELECT "temperature", "sensor_id" FROM "airSensors" WHERE ("sensor_id" = 'TLM0100' OR "sensor_id" = 'TLM0101') AND time >= '2024-01-24T11:30:00Z' AND time <= '2024-01-24T12:30:00Z`;
-const url = 'http://localhost:8086';
-const db = 'dev';
-const authToken = 'Z_MFie7YJz00jtknyzZwlZXLr1S6bFRyTVpWIpSA52tOPSEUhdmcWpM2J850QZSC2lmGay9A0a7-ePAzLeECBg==\n'; // Replace with your authentication token
-
+const url = environment.influxUrl; // InfluxDB server URL
+const token = environment.influxToken; // InfluxDB authentication token
+const org = environment.influxOrg; // Your organization - adjust as needed
+const bucket = environment.influxBucket; // Your bucket - adjust as needed
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChartService {
 
-  constructor(private http: HttpClient) { }
+  query: string = '';
 
-  fetchData(): Observable<any> {
-    // Define the headers with the authentication token
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${authToken}`,
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization',
-      'mode': 'cors',
+
+  constructor() { }
+
+  fetchData(start:string, end:string, custom:boolean): Observable<any> {
+    // Example: Aggregate windows every 1 hour
+    const windowPeriod = '60m';
+    if(custom){
+      this.query = `from(bucket: "${bucket}")
+        |> range(start: ${start}, stop: ${end})
+        |> filter(fn: (r) => r["_measurement"] == "mqtt_consumer")
+        |> filter(fn: (r) => r["_field"] == "uplink_message_decoded_payload_temperature")
+        |> aggregateWindow(every: 1d, fn: mean, createEmpty: false)
+        |> yield(name: "Measurements")`;
+    }
+    else{
+      this.query = `from(bucket: "${bucket}")
+        |> range(start: ${start}, stop: ${end})
+        |> filter(fn: (r) => r["_measurement"] == "mqtt_consumer")
+        |> filter(fn: (r) => r["_field"] == "uplink_message_decoded_payload_temperature")
+        |> aggregateWindow(every: ${windowPeriod}, fn: mean, createEmpty: false)
+        |> yield(name: "Measurements")`;
+    }
+
+
+    const influxDB = new InfluxDB({ url, token,});
+    const queryApi = influxDB.getQueryApi(org);
+
+
+    return new Observable(observer => {
+      queryApi.queryRows(this.query, {
+        next(row, tableMeta) {
+          const o = tableMeta.toObject(row);
+          observer.next(o);
+        },
+        error(error) {
+          observer.error(error);
+        },
+        complete() {
+          observer.complete();
+        },
+      });
     });
+  }
 
-    // Build the full URL
-    const fullUrl = `${url}/query?db=${db}&q=${influxQuery}`;
+  fetchWeatherData(start:string, end:string, custom:boolean): Observable<any> {
+    // Example: Aggregate windows every 1 hour
+    const windowPeriod = '60m';
+    if(custom){
+      this.query = `from(bucket: "${bucket}")
+        |> range(start: ${start}, stop: ${end})
+        |> filter(fn: (r) => r["_measurement"] == "weather")
+        |> filter(fn: (r) => r["_field"] == "temperature")
+        |> filter(fn: (r) => r["city"] == "Bergisch Gladbach")
+        |> aggregateWindow(every: 1d, fn: mean, createEmpty: false)
+        |> yield(name: "Measurements")`;
+    }
+    else{
+      this.query = `from(bucket: "${bucket}")
+        |> range(start: ${start}, stop: ${end})
+        |> filter(fn: (r) => r["_measurement"] == "weather")
+        |> filter(fn: (r) => r["_field"] == "temperature")
+        |> filter(fn: (r) => r["city"] == "Bergisch Gladbach")
+        |> aggregateWindow(every: ${windowPeriod}, fn: mean, createEmpty: false)
+        |> yield(name: "Measurements")`;
+    }
 
-    // Make the HTTP GET request with the headers
-    return this.http.get(fullUrl, { headers });
+
+    const influxDB = new InfluxDB({ url, token,});
+    const queryApi = influxDB.getQueryApi(org);
+
+
+    return new Observable(observer => {
+      queryApi.queryRows(this.query, {
+        next(row, tableMeta) {
+          const o = tableMeta.toObject(row);
+          observer.next(o);
+        },
+        error(error) {
+          observer.error(error);
+        },
+        complete() {
+          observer.complete();
+        },
+      });
+    });
   }
 }

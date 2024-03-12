@@ -1,0 +1,21 @@
+<div>
+  <div class="container-range">
+      <mat-form-field>
+        <mat-label>Timerange</mat-label>
+        <mat-select required [(value)]="selected" (selectionChange)="onSelectionChange(selected)">
+          <mat-option value="-6h">6h</mat-option>
+          <mat-option value="-12h">12h</mat-option>
+          <mat-option value="-24h">24h</mat-option>
+          <mat-option value="-48h">48h</mat-option>
+          <mat-option value="custom">Custom</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+
+  <div class="container-chart">
+    <canvas id="canvas">{{chart}}</canvas>
+  </div>
+</div>
+
+
+

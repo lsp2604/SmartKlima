@@ -10,6 +10,7 @@ import {DatePipe, NgClass} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
 import {DownlinkService} from "../Service/downlink.service";
 import {MatIcon} from "@angular/material/icon";
+import {ChartService} from "../Service/chart.service";
 
 declare var $: any;
 
@@ -34,8 +35,9 @@ declare var $: any;
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private weatherService: WeatherService, private downlinkService: DownlinkService){}
+  constructor(private weatherService: WeatherService, private downlinkService: DownlinkService, private chartService:ChartService){}
 
+  public tempIn: any;
   public weather: any;
   myDate: Date = new Date();
 
@@ -45,6 +47,14 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.chartService.fetchLastData().subscribe((data: any) => {
+      this.tempIn = data;
+    })
+
+
+
+
     this.loadWeather('50.9856', '7.13298');
 
     $("#slider").roundSlider({

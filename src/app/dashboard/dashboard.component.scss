@@ -245,9 +245,8 @@ body {
 
 
 .Temp-Control {
-  display: grid;
-  justify-content: center;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
   float: right;
   min-width: 350px;
   width: 45%;
@@ -260,6 +259,7 @@ body {
 }
 
 .slider-container {
+  margin-top: 10%;
   display: flex;
   align-items: center;
   justify-content: center;

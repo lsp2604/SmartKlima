@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
       sliderType: "min-range",
       circleShape: "pie",
       startAngle: 315,
-      radius: 120,
+      radius: 160,
       lineCap: "round",
       widows: 32,
       min: 16,

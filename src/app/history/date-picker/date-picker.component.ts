@@ -1,58 +1,79 @@
-import {Component, Inject, Optional} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {
+  DateRange,
+  DefaultMatCalendarRangeStrategy, MAT_DATE_RANGE_SELECTION_STRATEGY,
   MatDatepickerModule
 } from "@angular/material/datepicker";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {JsonPipe} from "@angular/common";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import { DatePipe } from '@angular/common';
+import {MatDialogRef} from "@angular/material/dialog";
 
 
 
 @Component({
   selector: 'app-date-picker',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
+  providers: [
+    provideNativeDateAdapter(),
+    {
+      provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
+      useClass: DefaultMatCalendarRangeStrategy,
+    }
+  ],
   imports: [MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule, JsonPipe],
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.scss'
 })
 export class DatePickerComponent {
 
+  constructor(private dialog: MatDialogRef<DatePickerComponent>) {}
+  selectedDateRange: DateRange<Date | undefined> | undefined;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,private dialog: MatDialogRef<DatePickerComponent>,@Optional() private datePipe: DatePipe) {
-    // data.start = new Date();
-    // data.end = new Date();
+  _onSelectedChange(date: Date | undefined | null): void {
+    if (
+      this.selectedDateRange &&
+      this.selectedDateRange.start &&
+      date! > this.selectedDateRange.start &&
+      !this.selectedDateRange.end
+    ) {
+      this.selectedDateRange = new DateRange(
+        this.selectedDateRange.start,
+        date
+      );
+    } else {
+      this.selectedDateRange = new DateRange(date, null);
+    }
   }
 
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
-
-
-  // Helper method to format dates
-  stringify () {
-    const start = JSON.stringify(this.range.value.start);
-    const end = JSON.stringify(this.range.value.end);
-
-    start.replace(/"/g, '');
-    end.replace(/"/g, '');
-
-    const res_start = JSON.parse(start);
-    const res_end = JSON.parse(end);
-
-    return {start: res_start, end: res_end};
+  formatDate(date: Date | undefined | null) {
+    if (date) {
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Monate sind 0-basiert
+      const year = date.getFullYear();
+      const hours = date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0') + ':' + date.getSeconds().toString().padStart(2, '0') + '.' + date.getMilliseconds().toString().padStart(3, '0');
+      return `${year}-${month}-${day}T${hours}Z`;
+    } else {
+      return '';
+    }
   }
+
+  formatSelectedDateRange(selectedDateRange: DateRange<Date | undefined> | undefined) {
+    if (selectedDateRange) {
+      const formattedStart = this.formatDate(selectedDateRange.start);
+      const formattedEnd = this.formatDate(selectedDateRange.end);
+      return new DateRange(formattedStart, formattedEnd);
+    } else {
+      return new DateRange(null, null);
+    }
+  }
+
+
 
 
   save() {
-    this.data = this.stringify();
-
-
-    this.dialog.close(this.data);
+    this.dialog.close(this.formatSelectedDateRange(this.selectedDateRange));
   }
 
 }

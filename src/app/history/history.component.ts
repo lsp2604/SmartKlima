@@ -78,7 +78,7 @@ export class HistoryComponent implements OnInit {
                 family: 'Verdana',
                 size: 12,
                 weight: 'bold',
-                 
+
               }
             }
           }
@@ -282,7 +282,7 @@ export class HistoryComponent implements OnInit {
     const custom = true;
     dialogConfig.data = {start, end};
 
-    dialogConfig.height = '7vw';
+    dialogConfig.height = '60vw';
     dialogConfig.width = '75vh';
     const dialogRef = this.dialog.open(DatePickerComponent, dialogConfig);
 

@@ -11,6 +11,7 @@ import {MatDivider} from "@angular/material/divider";
 import {DownlinkService} from "../Service/downlink.service";
 import {MatIcon} from "@angular/material/icon";
 import {ChartService} from "../Service/chart.service";
+import {BreakpointObserver} from "@angular/cdk/layout";
 
 declare var $: any;
 
@@ -35,10 +36,12 @@ declare var $: any;
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private weatherService: WeatherService, private downlinkService: DownlinkService, private chartService:ChartService){}
+  constructor(private weatherService: WeatherService, private downlinkService: DownlinkService, private chartService:ChartService,
+              public breakpointObserver: BreakpointObserver){}
 
   public tempIn: any;
   public weather: any;
+  public radius: number = 120;
   myDate: Date = new Date();
 
 
@@ -48,11 +51,19 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
+    this.breakpointObserver
+      .observe(['(min-width: 1440px)'])
+      .subscribe(state => {
+        if (state.matches) {
+          this.radius = 160;
+        } else {
+          this.radius = 120;
+        }
+      })
+
     this.chartService.fetchLastData().subscribe((data: any) => {
       this.tempIn = data;
     })
-
-
 
 
     this.loadWeather('50.9856', '7.13298');
@@ -61,7 +72,7 @@ export class DashboardComponent implements OnInit {
       sliderType: "min-range",
       circleShape: "pie",
       startAngle: 315,
-      radius: 160,
+      radius: this.radius,
       lineCap: "round",
       widows: 32,
       min: 16,

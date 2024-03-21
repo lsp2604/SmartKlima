@@ -71,6 +71,17 @@ export class HistoryComponent implements OnInit {
       },
       options: {
         plugins: {
+          legend: {
+            labels: {
+              color: 'rgba(217, 217, 217)',
+              font: {
+                family: 'Verdana',
+                size: 12,
+                weight: 'bold',
+
+              }
+            }
+          }
         },
         scales: {
           x: {
@@ -78,7 +89,12 @@ export class HistoryComponent implements OnInit {
               color: 'rgba(154, 154, 154, 10)'
             },
             ticks:{
-              color: 'rgba(154, 154, 154, 10)'
+              color: 'rgba(217, 217, 217)',
+              font: {
+                family: 'Verdana',
+                size: 12,
+                weight: 'bold'
+              }
             }
           },
           y: {
@@ -86,7 +102,12 @@ export class HistoryComponent implements OnInit {
               color: 'rgba(154, 154, 154, 10)'
             },
             ticks:{
-              color: 'rgba(154, 154, 154, 10)'
+              color: 'rgba(217, 217, 217)',
+              font: {
+                family: 'Verdana',
+                size: 12,
+                weight: 'bold'
+              }
             }
           }
       }
@@ -261,8 +282,8 @@ export class HistoryComponent implements OnInit {
     const custom = true;
     dialogConfig.data = {start, end};
 
-    dialogConfig.height = '7vw';
-    dialogConfig.width = '75vh';
+    dialogConfig.height = '90%';
+    dialogConfig.width = '55%';
     const dialogRef = this.dialog.open(DatePickerComponent, dialogConfig);
 
 

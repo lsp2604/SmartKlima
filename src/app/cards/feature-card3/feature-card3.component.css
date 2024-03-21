@@ -29,8 +29,8 @@
 
 .feature-card3-icon {
   font-size: 300px; /* Or any other size */
-  width: 300px; /* Match the width to the font-size for alignment purposes */
-  height: 300px; /* Match the height to the font-size */
+  width: auto; /* Match the width to the font-size for alignment purposes */
+  height: auto; /* Match the height to the font-size */
   line-height: 1; /* Adjust line-height for proper alignment */
 }
 

@@ -16,22 +16,6 @@
       <section class="controlls">
 
         <!--      CONTROLLERS      -->
-        <button class="controlls__tab">
-          <mat-icon>menu</mat-icon>
-          <div class="controlls__text">
-            <h3 class="controlls__header">Light</h3>
-            <p class="controlls__state" id="light">OFF</p>
-          </div>
-        </button>
-
-        <button class="controlls__tab">
-          <mat-icon>menu</mat-icon>
-          <div class="controlls__text">
-            <h3 class="controlls__header">Roller Shades</h3>
-            <p class="controlls__state" id="shades">OFF</p>
-          </div>
-        </button>
-
         <button class="controlls__tab"
                 (click)="enableDisableRule()"
                 [ngClass]="{'on' : toggle, 'off': !toggle}">
@@ -43,14 +27,49 @@
           </div>
         </button>
 
-        <button class="controlls__tab">
-
+        <button class="controlls__tab"
+                (click)="enableDisableRule2()"
+                [ngClass]="{'on' : toggle2, 'off': !toggle2}">
           <mat-icon>menu</mat-icon>
           <div class="controlls__text">
-            <h3 class="controlls__header">Coffee Maker</h3>
-            <p class="controlls__state" id="coffee">OFF</p>
+            <h3 class="controlls__header">Ruhe Modus</h3>
+            <p class="controlls__state" id="coffee">{{status2}}</p>
           </div>
         </button>
+
+        <div class="controlls__tab" style="padding: 0 !important;">
+          <mat-form-field class="temp_select">
+            <mat-label>Temperature</mat-label>
+            <mat-select>
+              @for (temp of temps; track temp) {
+                <mat-option [value]="temp.value">{{temp.viewValue}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field class="temp_select"  >
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="datepicker">
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+          </mat-form-field>
+        </div>
+
+
+        <button class="controlls__tab">
+          <mat-icon>menu</mat-icon>
+          <div class="controlls__text">
+            <h3 class="controlls__header">Vorheizen</h3>
+            <p class="controlls__state">x</p>
+          </div>
+        </button>
+
       </section>
 
 
@@ -72,7 +91,7 @@
             <div class="content-left">
               TEMPERATUR AUßEN <br>
               <span>{{weather?.main.temp}}°C</span>
-              <span>
+              <span class="weather-img">
                 <img class="weather-icon" [src]="'http://openweathermap.org/img/wn/' + weather?.weather[0].icon + '@4x.png'" alt="weather icon">
               </span>
             </div>
@@ -80,6 +99,9 @@
             <div class="content-right">
               TEMPERATUR INNEN <br>
               <span>{{tempIn?._value}}°C</span>
+              <span class="weather-img">
+                <img class="weather-icon" [src]="'http://openweathermap.org/img/wn/' + weather?.weather[0].icon + '@4x.png'" alt="weather icon">
+              </span>
             </div>
           </div>
         </section>
@@ -101,15 +123,16 @@
         <div class="slider-container">
           <div id="slider"></div>
         </div>
+
       </section>
     </div>
 
 
 
 
-
   </main>
 </section>
+
 
 </body>
 </html>

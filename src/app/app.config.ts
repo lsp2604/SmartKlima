@@ -4,6 +4,7 @@ import { routes } from './app.routes';
 import {provideAnimations} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
+import {provideNativeDateAdapter} from "@angular/material/core";
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'mqtt.lsplabs.de',
@@ -13,5 +14,5 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
 };
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimations(), importProvidersFrom(HttpClientModule),importProvidersFrom(MqttModule.forRoot(MQTT_SERVICE_OPTIONS)),]
+  providers: [provideRouter(routes), provideAnimations(), importProvidersFrom(HttpClientModule),importProvidersFrom(MqttModule.forRoot(MQTT_SERVICE_OPTIONS)),provideNativeDateAdapter()],
 };

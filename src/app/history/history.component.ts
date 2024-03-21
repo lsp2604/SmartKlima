@@ -282,8 +282,8 @@ export class HistoryComponent implements OnInit {
     const custom = true;
     dialogConfig.data = {start, end};
 
-    dialogConfig.height = '60vw';
-    dialogConfig.width = '75vh';
+    dialogConfig.height = '90%';
+    dialogConfig.width = '55%';
     const dialogRef = this.dialog.open(DatePickerComponent, dialogConfig);
 
 

@@ -21,12 +21,9 @@ $grey-light: #edf1f7;
 body {
   padding-top: 8vh;
   font-family: Open Sans, serif;
-  height: 100vh;
-  width: 100vw;
   color: #030303;
   background: $grey-light;
   display: grid;
-  overflow-y: hidden ;
 }
 
 .fas, .fab, .far {
@@ -380,8 +377,8 @@ body {
   }
   .vertical-divider{
     grid-area: divider;
-    height: 250%;
-    width: 3px;
+    height: 100%;
+    width: 2px;
     background-color: #3164ff7d;
   }
 

@@ -22,12 +22,11 @@ body {
   padding-top: 8vh;
   font-family: Open Sans, serif;
   height: 100vh;
+  width: 100vw;
   color: #030303;
   background: $grey-light;
   display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: max-content auto;
-  overflow-y: scroll ;
+  overflow-y: hidden ;
 }
 
 .fas, .fab, .far {
@@ -36,33 +35,26 @@ body {
 }
 
 
-.main-section {
-  display: flex;
-}
+
 
 /* Main content */
 
 .main {
-  flex: 6;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   background: $grey-light;
   &__panel {
     padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
   }
 }
 
 .weather {
-  float: left;
-  min-width: 250px;
-  width: 45%;
-  min-height: 450px;
-  height: 95%;
+  grid-area: 1 / 1 / 4 / 2;
   background: #fff;
   border-radius: 2px;
-  padding: 12px;
-  margin: 12px;
   display: flex;
   flex-direction: column;
   box-shadow: 1px 4px 16px -8px rgba(0,0,0,0.3);
@@ -88,6 +80,23 @@ body {
         border-radius: 4px;
       }
     }
+  }
+  &-content {
+    width: 100%;
+    height: 100%;
+  }
+  &-content-temp {
+    display: grid !important;
+    grid-template-columns: 1fr 0 1fr;
+    margin-top: 10%;
+    justify-items: center;
+    align-items: center; // Einkommentieren für center center ---> jetzt gerade center top
+    height: 80%;
+    grid-template-areas: "left divider right"
+  }
+  &-icon {                          // Wetter Symbol
+    width: 40%;
+    height: auto;
   }
 }
 
@@ -116,21 +125,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0;
-}
-
-.weather-content {
-  width: 100%;
-  height: 100%;
-}
-
-.weather-content-temp {
-  display: grid !important;
-  grid-template-columns: 1fr 0 1fr;
-  margin-top: 10%;
-  justify-items: center;
-  align-items: center; // Einkommentieren für center center ---> jetzt gerade center top
-  height: 80%;
-  grid-template-areas: "left divider right"
 }
 
 .vertical-divider {
@@ -180,10 +174,6 @@ body {
   margin-top: -11px;
 }
 
-.weather-icon {                          // Wetter Symbol
-  width: 40%;
-  height: auto;
-}
 
 
 .temp_select {
@@ -196,16 +186,14 @@ body {
 
 
 .controlls {
-  width: 45%;
-  float:right;
-  margin: 10px;
-  margin-top: 0;
-  padding: 12px;
+  width: 98%;
+  height: 98%;
+  grid-area: 1 / 2 / 2 / 3;
   display: grid;
   flex-wrap: wrap;
   grid-template-columns: 50% 50%;
-  column-gap: 24px;
-  row-gap: 24px;
+  column-gap: 2%;
+  row-gap: 2%;
   &__tab {
     cursor: pointer;
     padding: 8px;
@@ -215,8 +203,6 @@ body {
     border: none;
     border-radius: 2px;
     box-shadow: 1px 4px 16px -8px rgba(0,0,0,0.3);
-    height: 5vw;
-
     &--active {
       i {
         color: #fff;
@@ -258,21 +244,12 @@ body {
 
 
 
-
-
 .Temp-Control {
+  grid-area: 2 / 2 / 4 / 3;
   display: flex;
   flex-direction: column;
-  float: right;
-  min-width: 350px;
-  width: 45%;
-  min-height: 280px;
-  height: 30vh;
   background: #fff;
-  padding: 12px;
   box-shadow: 1px 4px 16px -8px rgba(0,0,0,0.3);
-  //margin-top: 21.5px;
-  margin-top: 1%;
 }
 
 .slider-container {
@@ -351,7 +328,6 @@ body {
 }
 
 @media (max-width: 1000px){
-
   html{
     width:100%;
     max-width: 1120px;
@@ -422,18 +398,6 @@ body {
   .main__panel {
     height: 100vh;
     width: auto;
-  }
-  .weather {
-    height: 80vh;
-    width: 45%;
-  }
-  .controlls {
-    height: 15vh;
-    width: 45%;
-  }
-  .Temp-Control {
-    height: 60vh;
-    width: 45%;
   }
 }
 

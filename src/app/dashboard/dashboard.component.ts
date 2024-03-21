@@ -1,9 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
-import { TempOutComponent } from "./temp-out/temp-out.component";
-import { TempReglerComponent } from './temp-regler/temp-regler.component';
-import { UrlaubsNachtmodusComponent } from './urlaubs-nachtmodus/urlaubs-nachtmodus.component';
-import { RuhemodusComponent } from './ruhemodus/ruhemodus.component';
 import { DownlinkComponent } from "../downlink/downlink.component";
 import {WeatherService} from "../Service/weather.service";
 import {DatePipe, NgClass} from "@angular/common";
@@ -20,18 +16,14 @@ declare var $: any;
     standalone: true,
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
-  imports: [
-    DatePipe,
-    MatGridList,
-    MatGridTile,
-    MatDivider,
-    TempOutComponent,
-    TempReglerComponent,
-    UrlaubsNachtmodusComponent,
-    RuhemodusComponent,
-    DownlinkComponent,
-    MatIcon,
-    NgClass
+    imports: [
+      DatePipe,
+      MatGridList,
+      MatGridTile,
+      MatDivider,
+      DownlinkComponent,
+      MatIcon,
+      NgClass,
   ]
 })
 export class DashboardComponent implements OnInit {

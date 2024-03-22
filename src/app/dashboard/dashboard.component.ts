@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import { DownlinkComponent } from "../downlink/downlink.component";
 import {WeatherService} from "../Service/weather.service";
-import {DatePipe, NgClass} from "@angular/common";
+import {DatePipe, NgClass, NgOptimizedImage} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
 import {DownlinkService} from "../Service/downlink.service";
 import {MatIcon} from "@angular/material/icon";
@@ -21,6 +21,7 @@ import {MatInput, MatInputModule} from "@angular/material/input";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
 import {MatNativeDateModule} from "@angular/material/core";
+import {NgxMatTimepickerComponent, NgxMatTimepickerDirective, NgxMatTimepickerModule} from "ngx-mat-timepicker";
 
 
 declare var $: any;
@@ -50,7 +51,11 @@ interface Temp {
     MatNativeDateModule,
     MatDatepickerModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgxMatTimepickerComponent,
+    NgxMatTimepickerModule,
+    NgxMatTimepickerDirective,
+    NgOptimizedImage
 
   ]
 })
@@ -63,7 +68,8 @@ export class DashboardComponent implements OnInit {
   public weather: any;
   public radius: number = 120;
   myDate: Date = new Date();
-
+  selectedTimes: any;
+  vvv: any;
 
   toggle = true;
   status = 'On';
@@ -83,12 +89,6 @@ export class DashboardComponent implements OnInit {
     {value: '24', viewValue: '24°C'},
     {value: '25', viewValue: '25°C'},
     {value: '26', viewValue: '26°C'},
-    {value: '27', viewValue: '27°C'},
-    {value: '28', viewValue: '28°C'},
-    {value: '29', viewValue: '29°C'},
-    {value: '30', viewValue: '30°C'},
-    {value: '31', viewValue: '31°C'},
-    {value: '32', viewValue: '32°C'}
   ];
 
 
@@ -119,7 +119,7 @@ export class DashboardComponent implements OnInit {
       lineCap: "round",
       widows: 32,
       min: 16,
-      max: 32,
+      max: 26,
       svgMode: true,
       handleSize: "+20",
       pathColor: "#e3e4ed",
@@ -161,6 +161,12 @@ export class DashboardComponent implements OnInit {
   enableDisableRule2() {
     this.toggle2 = !this.toggle2;
     this.status2 = this.toggle2 ? 'On' : 'Off';
+  }
+
+  clearButton() {
+    console.log("Clear Button");
+    console.log(this.vvv);
+    console.log(this.temps);
   }
 }
 

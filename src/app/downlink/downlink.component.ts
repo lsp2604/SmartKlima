@@ -45,7 +45,6 @@ export class DownlinkComponent implements OnInit, OnDestroy{
   sendmsg(): void {
 
     this.msg ='{"downlinks":[{"frm_payload":"' + this.frm_payload + '"}]}';
-    // use unsafe publish for non-ssl websockets
     this._mqttService.unsafePublish(this.pushtopicname, this.msg, { qos: 1, retain: true});
     this.msg = '';
   }

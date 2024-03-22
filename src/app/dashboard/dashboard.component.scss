@@ -56,6 +56,7 @@ body {
   flex-direction: column;
   box-shadow: 1px 4px 16px -8px rgba(0,0,0,0.3);
   &__nav {
+    margin-top: 10px;
     padding-bottom: 12px;
     display: flex;
     justify-content: space-around;
@@ -92,9 +93,17 @@ body {
     grid-template-areas: "left divider right"
   }
   &-icon {                          // Wetter Symbol
-    width: 40%;
+    width: 100%;
     height: auto;
   }
+  &-icon2 {
+    width: 15vh;
+    height: auto;
+  }
+}
+
+.spacer {
+  margin: -10%;
 }
 
 .card-header-location span:first-child {      //BERGISCH GLADBACH
@@ -163,6 +172,7 @@ body {
   font-weight: 800;
   font-size: 13px;
   margin-top: -75px;
+
 }
 
 .content-right span {
@@ -240,7 +250,6 @@ body {
 }
 
 
-
 .Temp-Control {
   grid-area: 2 / 2 / 4 / 3;
   display: flex;
@@ -260,12 +269,6 @@ body {
 /* Media */
 
 @media (max-width: 550px){
-  html{
-    width:100%;
-    max-width: 1120px;
-    overflow: auto;
-    overflow-x: hidden;
-  }
   .controlls {
     padding: initial;
     grid-template-columns: 100%;
@@ -280,17 +283,15 @@ body {
   .weather-content-temp {
     margin-top: 10vh;
   }
-  .weather {
-    width: 80%;
-    padding: initial;
-    margin: 10%;
-  }
-  .main-section {
+
+  .main__panel {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: auto 1% auto ;
+    margin-left: -45px;
   }
+
   .fa-chevron-left {
     transform: rotate(-90deg);
   }
@@ -311,10 +312,7 @@ body {
     gap: 0;
   }
   .vertical-divider{
-    grid-area: divider;
-    height: 250%;
-    width: 3px;
-    background-color: #3164ff7d;
+    display: none;
   }
 
   .Temp-Control{

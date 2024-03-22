@@ -36,7 +36,7 @@
           </div>
         </button>
 
-        <div class="controlls__tab" style="padding: 0 !important;">
+        <div class="controlls__tab" style="padding: 0 !important; cursor: default">
           <mat-form-field class="temp_select">
             <mat-label>Temperature</mat-label>
             <mat-select>
@@ -47,25 +47,21 @@
           </mat-form-field>
 
 
-          <mat-form-field class="temp_select"  >
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="datepicker">
-            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
-            <mat-datepicker #datepicker>
-              <mat-datepicker-actions>
-                <button mat-button matDatepickerCancel>Cancel</button>
-                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-              </mat-datepicker-actions>
-            </mat-datepicker>
+          <mat-form-field class="temp_select" style="cursor: pointer">
+            <mat-label>Choose a Time</mat-label>
+            <input matInput [ngxMatTimepicker]="pickerB">
+            <mat-icon matSuffix (click)="pickerB.open()">schedule</mat-icon>
           </mat-form-field>
+          <ngx-mat-timepicker #pickerB color="primary">
+          </ngx-mat-timepicker>
         </div>
 
 
-        <button class="controlls__tab">
+        <button class="controlls__tab" (click)="clearButton()">
           <mat-icon>menu</mat-icon>
           <div class="controlls__text">
-            <h3 class="controlls__header">Vorheizen</h3>
-            <p class="controlls__state">x</p>
+            <h3 class="controlls__header">Jetzt Vorheizen</h3>
+            <p class="controlls__state"></p>
           </div>
         </button>
 
@@ -99,7 +95,10 @@
               TEMPERATUR INNEN <br>
               <span>{{tempIn?._value}}°C</span>
               <span class="weather-img">
-                <img class="weather-icon" [src]="'http://openweathermap.org/img/wn/' + weather?.weather[0].icon + '@4x.png'" alt="weather icon">
+                <div class="spacer">
+                  <br>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="weather-icon2" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9"/><path d="M9 22V12h6v10M2 10.6L12 2l10 8.6"/></svg>
               </span>
             </div>
           </div>

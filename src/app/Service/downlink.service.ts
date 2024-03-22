@@ -7,7 +7,6 @@ import {MqttService} from "ngx-mqtt";
 export class DownlinkService {
 
   msg: any;
-  // frm_payload = "";
   pushtopicname = 'v3/fhdw-gl-smart-campus@ttn/devices/eui-a81758fffe088b90/down/push';
 
   constructor(private _mqttService: MqttService) { }
